@@ -1,0 +1,49 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.5: CloudTrail configuration changes",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "regions" : {
+      "exclude":  [
+        "*"
+      ],
+      "includeAnyhow": [
+        "us-east-1"
+      ]      
+    },
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.6-console-authentication-failures",
+      "eventDescription": "CIS.AWS.3.6 - Detect console authentication failures",
+      "eventPattern": {
+        "detail-type": [
+          "AWS Console Sign In via CloudTrail"
+        ],
+        "detail": {
+          "eventName": [
+            "ConsoleLogin"
+          ],
+          "errorMessage": [
+            "Failed authentication"
+          ]
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "High"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

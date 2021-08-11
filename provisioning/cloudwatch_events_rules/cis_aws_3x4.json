@@ -1,0 +1,41 @@
+{
+  "title": "CIS AWS 3.4: IAM policy changes",
+  "postSeverity": "Medium",
+  "eventSettings": {
+    "eventName": "foundation-cis.aws.3.4-detect-iam-policy-changes",
+    "eventDescription": "CIS AWS 3.4 - Publishes formatted IAM policy change events",
+    "eventPattern": {
+      "detail-type": [
+        "AWS API Call via CloudTrail"
+      ],
+      "detail": {
+        "eventSource": [
+          "iam.amazonaws.com"
+        ],
+        "eventName": [
+          "CreateAccessKey",
+          "DeleteAccessKey",
+          "DeleteRolePolicy",
+          "DeleteUserPolicy",
+          "PutGroupPolicy",
+          "PutRolePolicy",
+          "PutUserPolicy",
+          "CreatePolicy",
+          "DeletePolicy",
+          "CreatePolicyVersion",
+          "DeletePolicyVersion",
+          "AttachRolePolicy",
+          "DetachRolePolicy",
+          "AttachUserPolicy",
+          "DetachUserPolicy",
+          "AttachGroupPolicy",
+          "DetachGroupPolicy"
+        ]
+      }
+    }
+  },
+  "regions": [
+    "eu-central-1"
+  ],
+  "excludedAccountIds": []
+}

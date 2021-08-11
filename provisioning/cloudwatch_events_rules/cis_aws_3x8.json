@@ -1,0 +1,49 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.8: S3 bucket policy changes",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.8-detect-s3-bucket-policy-changes",
+      "eventDescription": "CIS AWS 3.8 - Detect S3 bucket policy change events",
+      "eventPattern": {
+        "detail-type": [
+          "AWS API Call via CloudTrail"
+        ],
+        "detail": {
+          "eventSource": [
+            "s3.amazonaws.com"
+          ],
+          "eventName": [
+            "PutBucketAcl",
+            "PutBucketPolicy",
+            "PutBucketCors",
+            "PutBucketLifecycle",
+            "PutBucketReplication",
+            "DeleteBucketPolicy",
+            "DeleteBucketCors",
+            "DeleteBucketLifecycle",
+            "DeleteBucketReplication"
+          ]
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "High"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

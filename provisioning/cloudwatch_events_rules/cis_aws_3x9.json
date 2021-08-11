@@ -1,0 +1,44 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.9: AWS Config configuration changes",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.9-detect-config-changes",
+      "eventDescription": "CIS AWS 3.9 - Detect AWS Config change events",
+      "eventPattern": {
+        "detail-type": [
+          "AWS API Call via CloudTrail"
+        ],
+        "detail": {
+          "eventSource": [
+            "config.amazonaws.com"
+          ],
+          "eventName": [
+            "PutConfigurationRecorder",
+            "StopConfigurationRecorder",
+            "DeleteDeliveryChannel",
+            "PutDeliveryChannel"
+          ]
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "High"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

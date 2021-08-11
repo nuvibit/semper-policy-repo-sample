@@ -1,0 +1,46 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.12: Changes to network gateways",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.12-detect-network-changes",
+      "eventDescription": "CIS AWS 3.12 - Detect network change events",
+      "eventPattern": {
+        "detail-type": [
+          "AWS API Call via CloudTrail"
+        ],
+        "detail": {
+          "eventSource": [
+            "ec2.amazonaws.com"
+          ],
+          "eventName": [
+            "CreateCustomerGateway",
+            "DeleteCustomerGateway",
+            "AttachInternetGateway",
+            "CreateInternetGateway",
+            "DeleteInternetGateway",
+            "DetachInternetGateway"
+          ]
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "Medium"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

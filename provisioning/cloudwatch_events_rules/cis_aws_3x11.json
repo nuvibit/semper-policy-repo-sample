@@ -1,0 +1,46 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.11: Changes to Network Access Control Lists",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.11-detect-network-acl-changes",
+      "eventDescription": "CIS AWS 3.11 - Detect network ACL change events",
+      "eventPattern": {
+        "detail-type": [
+          "AWS API Call via CloudTrail"
+        ],
+        "detail": {
+          "eventSource": [
+            "ec2.amazonaws.com"
+          ],
+          "eventName": [
+            "CreateNetworkAcl",
+            "CreateNetworkAclEntry",
+            "DeleteNetworkAcl",
+            "DeleteNetworkAclEntry",
+            "ReplaceNetworkAclEntry",
+            "ReplaceNetworkAclAssociation"
+          ]
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "Medium"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

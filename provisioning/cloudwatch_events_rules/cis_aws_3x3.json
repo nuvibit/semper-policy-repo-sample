@@ -1,0 +1,46 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.3: Usage of 'root' account",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "regions": {
+      "includeAnyhow": [
+        "us-east-1"
+      ]
+    },
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.3-detect-usage-of-root",
+      "eventDescription": "CIS AWS 3.3 - Detect usage of 'root' account",
+      "eventPattern": {
+        "detail-type": [
+          "AWS API Call via CloudTrail",
+          "AWS Console Sign In via CloudTrail"
+        ],
+        "detail": {
+          "userIdentity": {
+            "type": [
+              "Root"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "Critical"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

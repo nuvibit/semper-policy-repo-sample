@@ -1,0 +1,41 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.5: CloudTrail configuration changes",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "eventPattern": {
+      "detail-type": [
+        "AWS API Call via CloudTrail"
+      ],
+      "detail": {
+        "eventSource": [
+          "cloudtrail.amazonaws.com"
+        ],
+        "eventName": [
+          "CreateTrail",
+          "UpdateTrail",
+          "StartLogging",
+          "StopLogging",
+          "DeleteTrail"
+        ]
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "High"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}

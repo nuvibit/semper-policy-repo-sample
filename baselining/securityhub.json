@@ -1,0 +1,116 @@
+{
+    "excludedAccountIds": [],
+    "securityStandards": [
+        {
+            "standardName": "CIS AWS Foundations Benchmark",
+            "standardIdentifier": "cis-aws-foundations-benchmark/v/1.2.0",
+            "standardArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+            "enabled": true,
+            "disabledControls": [
+                {
+                    "controls": [
+                        "CIS.1.1",
+                        "CIS.2.4",
+                        "CIS.2.2"
+                    ],
+                    "disableReason": "as this is not the Master-Account",
+                    "inScope": [
+                        "*"
+                    ],
+                    "outOfScope": [
+                        {
+                            "accountIds": [
+                                "057462133786"
+                            ],
+                            "exceptionReason": "as this is the Master-Account"
+                        }
+                    ]
+                },
+                {
+                    "controls": [
+                        "CIS.2.3",
+                        "CIS.2.6"
+                    ],
+                    "disableReason": "as this is not the Core-Logging-Account",
+                    "inScope": [
+                        "*"
+                    ],
+                    "outOfScope": [
+                        {
+                            "accountIds": [
+                                "204905883646"
+                            ],
+                            "exceptionReason": "as this is the Core-Logging-Account"
+                        }
+                    ]
+                },
+                {
+                    "controls": [
+                        "CIS.4.3"
+                    ],
+                    "disableReason": "as this is the Sandbox account for Trusted Data Hub",
+                    "inScope": [
+                        "291652921831"
+                    ],
+                    "outOfScope": []
+                },
+                {
+                    "controls": [
+                        "CIS.3.x"
+                    ],
+                    "disableReason": "as this is covered via events",
+                    "inScope": [
+                        "*"
+                    ],
+                    "outOfScope": []
+                }
+            ]
+        },
+        {
+            "standardName": "AWS Foundational Security Best Practices",
+            "standardIdentifier": "aws-foundational-security-best-practices/v/1.0.0",
+            "standardArn": "arn:aws:securityhub:eu-central-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+            "enabled": true,
+            "disabledControls": [
+                {
+                    "controls": [
+                        "S3.5",
+                        "S3.6",
+                        "EC2.7",
+                        "KMS.1",
+                        "KMS.2"
+                    ],
+                    "disableReason": "as these are new controls. We need to adapt the Foundation first to accept this controls.",
+                    "inScope": [
+                        "*"
+                    ],
+                    "outOfScope": []
+                },
+                {
+                    "controls": [
+                        "SSM.1"
+                    ],
+                    "disableReason": "as this is an managed EKS account and the control cannot be met there.",
+                    "inScope": [
+                        "110067933875",
+                        "214859767004",
+                        "031558334998",
+                        "047630323623",
+                        "921662491603",
+                        "106435405048",
+                        "764080220686",
+                        "057541356950",
+                        "846458540911",
+                        "819745984720",
+                        "080055427302",
+                        "196312953506",
+                        "233323431058",
+                        "971904652595",
+                        "726054133844"
+                    ],
+                    "outOfScope": []
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.1: Unauthorized API calls",
+    "description": "",
+    "owner": {
+      "Name": "Mickey Mouse",
+      "Email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "regions": {
+      "includeAnyhow": [
+        "us-east-1"
+      ]
+    },
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.1-unauthorized-activity-attempt",
+      "eventDescription": "CIS AWS 3.1 - Detect unauthorized activity attempt events",
+      "eventPattern": {
+        "detail": {
+          "errorCode": [
+            {
+              "prefix": "AccessDenied"
+            },
+            "Client.UnauthorizedOperation"
+          ]
+        }
+      }
+    }
+  },
+  "postDetectionEnrichment": {
+    "customerSeverity": "Low"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "Name": "Donald Duck",
+      "Email": "donald.duck@nuvibit.com"
+    }
+  }
+}
