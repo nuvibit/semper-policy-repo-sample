@@ -8,11 +8,11 @@
       "Finding will be disabled as it can only be met in the Core Logging Account (204905883646)."
     ],
     "owner": {
-      "Name": "Mickey Mouse",
-      "Email": "mickey.mouse@nuvibit.com"
+      "name": "Mickey Mouse",
+      "email": "mickey.mouse@nuvibit.com"
     }
   },
-  "purificationCriteria": {
+  "filterCriteria": {
     "accountContext": {},
     "findingContext": {
       "findingSource": "securityhub",
@@ -21,33 +21,33 @@
         "control": "2.3"
       },
       "findingPattern": {
-        "AwsAccountId": [
+        "awsAccountId": [
           {
             "anything-but": "123456789012"
           }
         ],
-        "ProductFields": {
+        "productFields": {
           "StandardsGuideArn": [
             {
               "prefix": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark"
             }
           ],
-          "RuleId": [
+          "ruleId": [
             "2.3"
           ]
         }
       }
     }
   },
-  "postPurificationEnrichment": {
+  "eventEnrichment": {
     "ouId": true,
     "accountTags": true
   },
   "auditing": {
     "lastAttestationDate": "20210808",
     "auditor": {
-      "Name": "Donald Duck",
-      "Email": "donald.duck@nuvibit.com"
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
     }
   }
 }

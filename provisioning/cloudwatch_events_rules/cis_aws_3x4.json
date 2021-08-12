@@ -1,41 +1,57 @@
 {
-  "title": "CIS AWS 3.4: IAM policy changes",
-  "postSeverity": "Medium",
-  "eventSettings": {
-    "eventName": "foundation-cis.aws.3.4-detect-iam-policy-changes",
-    "eventDescription": "CIS AWS 3.4 - Publishes formatted IAM policy change events",
-    "eventPattern": {
-      "detail-type": [
-        "AWS API Call via CloudTrail"
-      ],
-      "detail": {
-        "eventSource": [
-          "iam.amazonaws.com"
+  "metaData": {
+    "version": "1.0.0",
+    "type": "cloudwatch_event_rule",
+    "title": "CIS AWS 3.4: IAM policy changes",
+    "description": [],
+    "owner": {
+      "name": "Mickey Mouse",
+      "email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "provisioning": {
+    "eventSettings": {
+      "eventName": "foundation-cis.aws.3.4-detect-iam-policy-changes",
+      "eventDescription": "CIS AWS 3.4 - Publishes formatted IAM policy change events",
+      "eventPattern": {
+        "detail-type": [
+          "AWS API Call via CloudTrail"
         ],
-        "eventName": [
-          "CreateAccessKey",
-          "DeleteAccessKey",
-          "DeleteRolePolicy",
-          "DeleteUserPolicy",
-          "PutGroupPolicy",
-          "PutRolePolicy",
-          "PutUserPolicy",
-          "CreatePolicy",
-          "DeletePolicy",
-          "CreatePolicyVersion",
-          "DeletePolicyVersion",
-          "AttachRolePolicy",
-          "DetachRolePolicy",
-          "AttachUserPolicy",
-          "DetachUserPolicy",
-          "AttachGroupPolicy",
-          "DetachGroupPolicy"
-        ]
+        "detail": {
+          "eventSource": [
+            "iam.amazonaws.com"
+          ],
+          "eventName": [
+            "CreateAccessKey",
+            "DeleteAccessKey",
+            "DeleteRolePolicy",
+            "DeleteUserPolicy",
+            "PutGroupPolicy",
+            "PutRolePolicy",
+            "PutUserPolicy",
+            "CreatePolicy",
+            "DeletePolicy",
+            "CreatePolicyVersion",
+            "DeletePolicyVersion",
+            "AttachRolePolicy",
+            "DetachRolePolicy",
+            "AttachUserPolicy",
+            "DetachUserPolicy",
+            "AttachGroupPolicy",
+            "DetachGroupPolicy"
+          ]
+        }
       }
     }
   },
-  "regions": [
-    "eu-central-1"
-  ],
-  "excludedAccountIds": []
+  "eventEnrichment": {
+    "customerSeverity": "Critical"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
+    }
+  }
 }

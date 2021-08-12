@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "type": "cloudwatch_event_rule",
     "title": "CIS AWS 3.2: Management Console sign-in without MFA",
-    "description": "",
+    "description": [],
     "owner" : {
       "Name" : "Mickey Mouse",
       "Email" : "mickey.mouse@nuvibit.com"
@@ -14,7 +14,7 @@
       "exclude":  [
         "*"
       ],
-      "includeAnyhow": [
+      "forceInclude": [
         "us-east-1"
       ]      
     },
@@ -49,7 +49,7 @@
       }
     }
   },
-  "postDetectionEnrichment" : {
+  "eventEnrichment" : {
     "customerSeverity" : "high"
   },
   "auditing" : {

@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "type": "cloudwatch_event_rule",
     "title": "CIS AWS 3.9: AWS Config configuration changes",
-    "description": "",
+    "description": [],
     "owner": {
-      "Name": "Mickey Mouse",
-      "Email": "mickey.mouse@nuvibit.com"
+      "name": "Mickey Mouse",
+      "email": "mickey.mouse@nuvibit.com"
     }
   },
   "provisioning": {
@@ -31,14 +31,14 @@
       }
     }
   },
-  "postDetectionEnrichment": {
+  "eventEnrichment": {
     "customerSeverity": "High"
   },
   "auditing": {
     "lastAttestationDate": "20210808",
     "auditor": {
-      "Name": "Donald Duck",
-      "Email": "donald.duck@nuvibit.com"
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
     }
   }
 }
