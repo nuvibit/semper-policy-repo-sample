@@ -13,7 +13,7 @@
                         "CIS.2.4",
                         "CIS.2.2"
                     ],
-                    "disableReason": "as this is not the Master-Account",
+                    "disableReason": "as this is not the Main-Account",
                     "inScope": [
                         "*"
                     ],
@@ -22,7 +22,7 @@
                             "accountIds": [
                                 "057462133786"
                             ],
-                            "exceptionReason": "as this is the Master-Account"
+                            "exceptionReason": "as this is the Main-Account"
                         }
                     ]
                 },
