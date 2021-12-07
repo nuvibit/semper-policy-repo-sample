@@ -1,0 +1,50 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "domain": "filtering",
+    "type": "config_rule",
+    "description": [],
+    "owner": {
+      "name": "Mickey Mouse",
+      "email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        },
+        "forceInclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [],
+        "forceInclude": []
+      }
+    },
+    "configRuleSettings": {
+      "configRuleName": "cis-aws-3-1-unauthorized-activity-attempt",
+      "configRuleDescription": "CIS AWS 3.1 - Detect unauthorized activity attempt events",
+      "complianceResourceTypes": [
+        "AWS::EC2::SecurityGroup"
+      ],
+      "coreSecurityEvalLambdaName": "semper_config_evaluator_sample"
+    }
+  },
+  "eventEnrichment": {
+    "customerSeverity": "Low"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
+    }
+  }
+}

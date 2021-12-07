@@ -1,7 +1,7 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "cloudwatch_event_rule",
+    "type": "configure_eventbridge_rule",
     "title": "CIS AWS 3.5: CloudTrail configuration changes",
     "description": [],
     "owner": {
@@ -9,17 +9,31 @@
       "email": "mickey.mouse@nuvibit.com"
     }
   },
-  "provisioning": {
-    "regions" : {
-      "exclude":  [
-        "*"
-      ],
-      "forceInclude": [
-        "us-east-1"
-      ]      
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        },
+        "forceInclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [
+          "*"
+        ],
+        "forceInclude": [
+          "us-east-1"
+        ]
+      }
     },
     "eventSettings": {
-      "eventName": "foundation-cis.aws.3.6-console-authentication-failures",
+      "eventName": "cis.aws.3.6-console-authentication-failures",
       "eventDescription": "CIS.AWS.3.6 - Detect console authentication failures",
       "eventPattern": {
         "detail-type": [

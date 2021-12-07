@@ -1,7 +1,7 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "cloudwatch_event_rule",
+    "type": "configure_eventbridge_rule",
     "title": "CIS AWS 3.8: S3 bucket policy changes",
     "description": [],
     "owner": {
@@ -9,9 +9,27 @@
       "email": "mickey.mouse@nuvibit.com"
     }
   },
-  "provisioning": {
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        },
+        "forceInclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [],
+        "forceInclude": []
+      }
+    },
     "eventSettings": {
-      "eventName": "foundation-cis.aws.3.8-detect-s3-bucket-policy-changes",
+      "eventName": "cis.aws.3.8-detect-s3-bucket-policy-changes",
       "eventDescription": "CIS AWS 3.8 - Detect S3 bucket policy change events",
       "eventPattern": {
         "detail-type": [

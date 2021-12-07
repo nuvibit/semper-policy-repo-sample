@@ -1,7 +1,7 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "cloudwatch_event_rule",
+    "type": "configure_eventbridge_rule",
     "title": "CIS AWS 3.3: Usage of 'root' account",
     "description": [],
     "owner": {
@@ -9,14 +9,25 @@
       "email": "mickey.mouse@nuvibit.com"
     }
   },
-  "provisioning": {
-    "regions": {
-      "forceInclude": [
-        "us-east-1"
-      ]
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": "*",
+        "forceInclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [],
+        "forceInclude": [
+          "us-east-1"
+        ]
+      }
     },
     "eventSettings": {
-      "eventName": "foundation-cis.aws.3.3-detect-usage-of-root",
+      "eventName": "cis.aws.3.3-detect-usage-of-root",
       "eventDescription": "CIS AWS 3.3 - Detect usage of 'root' account",
       "eventPattern": {
         "detail-type": [

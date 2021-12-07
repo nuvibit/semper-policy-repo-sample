@@ -1,0 +1,41 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "filter_semper_config_incompliance",
+    "title": "CIS AWS 3.10: Security group changes for Organization Management will be dropped",
+    "description": [],
+    "owner": {
+      "name": "Minnie Mouse",
+      "email": "minnie.mouse@nuvibit.com"
+    }
+  },
+  "configure": {
+    "policyScope": {},
+    "eventSettings": {
+      "eventName": "semper-detect-config-incompliance",
+      "eventDescription": "",
+      "eventPattern": {
+        "eventSource": [
+          "config.amazonaws.com"
+        ],
+        "requestParameters": {
+          "complianceTypes": [
+            "NON_COMPLIANT"
+          ],
+          "configRuleName": [                
+            {
+              "prefix": "semper-"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
+    }
+  }
+}

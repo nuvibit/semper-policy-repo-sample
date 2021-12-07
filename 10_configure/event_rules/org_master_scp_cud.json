@@ -1,0 +1,67 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "type": "configure_eventbridge_rule",
+    "title": "Custom Control: SCP created, updated or deleted",
+    "description": [],
+    "owner": {
+      "name": "Mickey Mouse",
+      "email": "mickey.mouse@nuvibit.com"
+    }
+  },
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": {
+          "accountId": [
+            "*"
+          ],
+          "ouId": [],
+          "accountTags": {}
+        },
+        "forceInclude": {
+          "accountId": [
+            "486183375590"
+          ],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [
+          "*"
+        ],
+        "forceInclude": [
+          "us-east-1"
+        ]
+      }
+    },
+    "eventSettings": {
+      "eventName": "scp-cud",
+      "eventDescription": "Custom Control - SCP created, updated or deleted",
+      "eventPattern": {
+        "detail": {
+          "eventName": [
+            "CreatePolicy",
+            "ModifyPolicy",
+            "DeletePolicy",
+            "DisablePolicyType"
+          ],
+          "eventSource": [
+            "organizations.amazonaws.com"
+          ]
+        }
+      }
+    }
+  },
+  "eventEnrichment": {
+    "customerSeverity": "High"
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
+    }
+  }
+}

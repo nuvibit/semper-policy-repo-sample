@@ -1,7 +1,7 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "cloudwatch_event_rule",
+    "type": "configure_eventbridge_rule",
     "title": "CIS AWS 3.10: Security group changes",
     "description": [],
     "owner": {
@@ -9,9 +9,27 @@
       "email": "mickey.mouse@nuvibit.com"
     }
   },
-  "provisioning": {
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        },
+        "forceInclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [],
+        "forceInclude": []
+      }
+    },
     "eventSettings": {
-      "eventName": "foundation-cis.aws.3.10-detect-securitygroup-changes",
+      "eventName": "cis.aws.3.10-detect-securitygroup-changes",
       "eventDescription": "CIS AWS 3.10 - Detected SecurityGroup change events",
       "eventPattern": {
         "detail-type": [
@@ -34,7 +52,8 @@
     }
   },
   "eventEnrichment": {
-    "customerSeverity": "Low"
+    "customerSeverity": "Low",
+    "customerWorkFlow": "WF1"
   },
   "auditing": {
     "lastAttestationDate": "20210808",

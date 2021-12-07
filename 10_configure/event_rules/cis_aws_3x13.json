@@ -1,7 +1,7 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "cloudwatch_event_rule",
+    "type": "configure_eventbridge_rule",
     "title": "CIS AWS 3.13: Route table changes",
     "description": [],
     "owner": {
@@ -9,9 +9,27 @@
       "email": "mickey.mouse@nuvibit.com"
     }
   },
-  "provisioning": {
+  "configure": {
+    "policyScope": {
+      "accountScope": {
+        "exclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        },
+        "forceInclude": {
+          "accountId": [],
+          "ouId": [],
+          "accountTags": {}
+        }
+      },
+      "regionScope": {
+        "exclude": [],
+        "forceInclude": []
+      }
+    },
     "eventSettings": {
-      "eventName": "foundation-cis.aws.3.13-detect-route-table-changes",
+      "eventName": "cis.aws.3.13-detect-route-table-changes",
       "eventDescription": "CIS AWS 3.13 - Detect route table change events",
       "eventPattern": {
         "detail-type": [
