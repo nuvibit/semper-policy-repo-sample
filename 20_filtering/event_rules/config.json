@@ -10,7 +10,6 @@
     }
   },
   "filtering": {
-    "policyScope": {},
     "eventPattern": {
       "eventSource": "config.amazonaws.com",
       "requestParameters": {

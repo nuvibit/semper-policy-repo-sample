@@ -10,24 +10,6 @@
     }
   },
   "configure": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "eventSettings": {
       "eventName": "cis.aws.3.8-detect-s3-bucket-policy-changes",
       "eventDescription": "CIS AWS 3.8 - Detect S3 bucket policy change events",

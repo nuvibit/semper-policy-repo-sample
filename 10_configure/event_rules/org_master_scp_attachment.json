@@ -15,16 +15,12 @@
         "exclude": {
           "accountId": [
             "*"
-          ],
-          "ouId": [],
-          "accountTags": {}
+          ]
         },
         "forceInclude": {
           "accountId": [
             "486183375590"
-          ],
-          "ouId": [],
-          "accountTags": {}
+          ]
         }
       },
       "regionScope": {

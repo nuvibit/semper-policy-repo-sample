@@ -15,14 +15,7 @@
         "exclude": {
           "accountId": [
             "678856817733"
-          ],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
+          ]
         }
       },
       "regionScope": {

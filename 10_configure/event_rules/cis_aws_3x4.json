@@ -10,24 +10,6 @@
     }
   },
   "configure": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "eventSettings": {
       "eventName": "cis.aws.3.4-detect-iam-policy-changes",
       "eventDescription": "CIS AWS 3.4 - Publishes formatted IAM policy change events",

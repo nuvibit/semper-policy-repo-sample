@@ -10,24 +10,6 @@
     }
   },
   "configure": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "eventSettings": {
       "eventName": "cis.aws.3.7-kms-key-disabled",
       "eventDescription": "CIS AWS 3.7 - Detect KMS key disabling or scheduled deletion events",

@@ -2,7 +2,7 @@
   "metaData": {
     "version": "1.0.0",
     "type": "configure_eventbridge_rule",
-    "title": "CIS AWS 3.5: CloudTrail configuration changes",
+    "title": "CIS AWS 3.6: Detect console authentication failures",
     "description": [],
     "owner": {
       "name": "Mickey Mouse",
@@ -11,18 +11,6 @@
   },
   "configure": {
     "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
       "regionScope": {
         "exclude": [
           "*"

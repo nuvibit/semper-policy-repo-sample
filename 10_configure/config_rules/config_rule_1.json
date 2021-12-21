@@ -10,24 +10,6 @@
     }
   },
   "configure": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "configRuleSettings": {
       "configRuleName": "cis-aws-3-1-unauthorized-activity-attempt",
       "configRuleDescription": "CIS AWS 3.1 - Detect unauthorized activity attempt events",

@@ -10,7 +10,6 @@
     }
   },
   "configure": {
-    "policyScope": {},
     "eventSettings": {
       "eventName": "semper-detect-config-incompliance",
       "eventDescription": "",
