@@ -10,20 +10,6 @@
     }
   },
   "filtering": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": ["*"],
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "eventPattern": {
       "detail-type": [
         "AWS API Call via CloudTrail"

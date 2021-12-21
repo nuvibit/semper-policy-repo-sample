@@ -12,15 +12,11 @@
   "configure": {
     "policyScope": {
       "accountScope": {
-        "exclude": "*",
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
+        "exclude": {
+          "accountId": ["*"]
         }
       },
       "regionScope": {
-        "exclude": [],
         "forceInclude": [
           "us-east-1"
         ]

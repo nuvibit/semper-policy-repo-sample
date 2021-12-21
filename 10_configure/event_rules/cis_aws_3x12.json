@@ -10,24 +10,6 @@
     }
   },
   "configure": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "eventSettings": {
       "eventName": "cis.aws.3.12-detect-network-changes",
       "eventDescription": "CIS AWS 3.12 - Detect network change events",
