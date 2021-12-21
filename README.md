@@ -1,19 +1,20 @@
 # Content
-[Intro](#intro)
-[SEMPER Policy-Repository](#policy_repository)
-[SEMPER Policy-Elements](#policy_elements)
-[SEMPER Policy-Scope](#policy_scope)
-[Intro](#intro)
-[Intro](#intro)
+[Intro](#intro)  
+[SEMPER Policy-Repository](#policy_repository)  
+[SEMPER Policy-Elements](#policy_elements)  
+[SEMPER Policy-Scope](#policy_scope)  
+[SEMPER Policy-Scope - accountScope](#account_scope)  
+[SEMPER Policy-Scope - regionScope](#region_scope)  
+
 
 
 # Intro {#intro}
-Everything in SEMPER is managed via the pilocies in the policy repository.
+Everything in SEMPER is managed via the policies stored in the SEMPER policy repository in the Core Security account.
 The format of the policies is JSON.
 
 #SEMPER Policy-Repository {#policy_repository}
 The following folder-structure is required for SEMPER and may not be altered.
-In the folders with the "..." you may place as many policy-json files as you like.
+In the folders with the "..." you may place your policy-json files.
 In case you like to disable policies, just create a further sub-folder (e.g. /disabled) and move the policies you like to disable to there.
 ```
 policy_repository
@@ -72,21 +73,16 @@ The SEMPER Policies always have the following sections
 }
 ```
 ## Section "policyScope" {#policy_scope}
-You can specify on a finegrained level on which member-account and in which AWS region a SEMPER policy should be applied. 
+You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied. 
 If a member account is in scope you can determine based on account-context like:
-- account-id
+- AWS account ID
 - OU-ID
-- account-tags
-
-Furthermore you can specify in **SEMPER Core Security** what are the target configure regions for AWS Config Rules, AWS Event Rules and Security Hub customizations.
-This you can override by the 
+- AWS account-tags (managed via the Organization Management Account)
 
 ![aws-organization-account-model](docs/aws-organization-account-model.png)
 
-
-
 Mandatory: no
-All elements of the policyScope-Section are optional
+All elements of the policyScope-Section are optional.
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
     ...
@@ -108,10 +104,10 @@ All elements of the policyScope-Section are optional
 }
 ```
 
-### Sub-Section "accountScope"
+### Sub-Section "accountScope" {#account_scope}
 The section "accountScope" allows you to exclude accounts based on specific context-information, which is:
 ```json {linenos=table,hl_lines=[],linenostart=50}
-Excluding based on specific account context-information
+Excluding based on specific account context-information:
 {
     ...
           "accountId" *optional*: ['string'],
@@ -147,7 +143,6 @@ or exclude everything independent of account context information
 }
 ```
 
-
 The optional "forceInclude"-node will be applied after the exclude operation. 
 So you are able to add specific accounts again:
 ```json {linenos=table,hl_lines=[],linenostart=50}
@@ -170,19 +165,63 @@ For example you can "exclude" all accounts and "forceInclude" the Organization M
 Sample:
 {
     ...
+    "policyScope": {
       "accountScope": {
         "exclude" :  {
           "accountId": ["*"]
         },
         "forceInclude" : {
           "accountTags" : {
-            "accountName" : "Core Organization Management"
+            "account_name" : [
+              "Core Organization Management"
+            ]
           }
         }
       }
+    }
     ...
 }
 ```
+### Sub-Section "regionScope" {#region_scope} 
+In the **SEMPER Core Security** module you can specify the target regions to configure AWS Config Rules, AWS Event Rules and Security Hub customizations. 
+The section "regionScope" allows you per policy to override this settings using the [AWS region names](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions):
+
+
+The optional "exclude"-node can have two flavors:
+
+Excluding based on specific account context-information
+```json {linenos=table,hl_lines=[],linenostart=50}
+{
+    ...
+    "policyScope" *optional*: {
+      ...
+      "regionScope" *optional*: {
+        "exclude" *optional*: ['string'],
+        "forceInclude" *optional*: ['string']
+      }
+    }
+    ...
+}
+```
+
+For example you can "exclude" all regions and "forceInclude" one specific region (take care that no SCP ios preventing the region):
+```json {linenos=table,hl_lines=[],linenostart=50}
+Sample:
+{
+    ...
+    "policyScope": {
+      "regionScope": {
+        "exclude" : ["*"],
+        "forceInclude": [
+          "us-east-1"
+        ]
+      }
+    }
+    ...
+}
+```
+
+
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
     "policyScope": {
@@ -271,35 +310,3 @@ The eventPattern has to follow this AWS specification: https://docs.aws.amazon.c
 ##Filter-Policies
 Filtering-Policies are applied to all Security-Findings. 
 A Filtering-Policy can be equipped with a policyScope section.
-This section will limit the application of the Filtering-Policy to findings where the "origin" corresponds to the policyScope.
-
-```json {linenos=table,hl_lines=[],linenostart=50}
-{
-    ...
-    // Optional Section
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": [
-          "us-east-1"
-        ]
-      }
-    }
-    ...
-}
-```
-
-#SEMPER Policy-Elements
-The SEMPER Policies always have the following sections
