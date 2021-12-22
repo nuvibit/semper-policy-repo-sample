@@ -5,14 +5,15 @@
 [SEMPER Policy-Scope](#policy_scope)  
 [SEMPER Policy-Scope - accountScope](#account_scope)  
 [SEMPER Policy-Scope - regionScope](#region_scope)  
+[SEMPER Policy-Types](#policy_types)  
 
 
 
-# Intro {#intro}
+# Intro <a id="intro"></a>
 Everything in SEMPER is managed via the policies stored in the SEMPER policy repository in the Core Security account.
 The format of the policies is JSON.
 
-#SEMPER Policy-Repository {#policy_repository}
+#SEMPER Policy-Repository <a id="policy_repository"></a>
 The following folder-structure is required for SEMPER and may not be altered.
 In the folders with the "..." you may place your policy-json files.
 In case you like to disable policies, just create a further sub-folder (e.g. /disabled) and move the policies you like to disable to there.
@@ -51,7 +52,7 @@ policy_repository
     │   ...
 ```
 
-#SEMPER Policy-Elements {#policy_elements}
+#SEMPER Policy-Elements <a id="policy_elements"></a>
 The SEMPER Policies always have the following sections
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
@@ -71,7 +72,7 @@ The SEMPER Policies always have the following sections
 |auditing | dict | (optional but recommended) here you can provide any attributes helping you to audit and reasses your policies. <br>  e.g. lastAttestationDate, contact-details of auditor |
 
 
-## Section "policyScope"<a id="policy_scope"></a>
+## Section "policyScope" <a id="policy_scope"></a>
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied. 
 If a member account is in scope you can determine based on account-context like:
 - AWS account ID
@@ -109,7 +110,7 @@ All elements of the policyScope-Section are optional.
 | >>forceInclude | list | (optional) here you can provide any attributes helping |
 
 
-### Sub-Section "accountScope" {#account_scope}
+### Sub-Section "accountScope" <a id="account_scope"></a>
 The section "accountScope" allows you to exclude accounts based on specific context-information, which is:
 ```json {linenos=table,hl_lines=[],linenostart=50}
 Excluding based on specific account context-information:
@@ -202,7 +203,7 @@ Sample:
 }
 ```
 
-### Sub-Section "regionScope" {#region_scope} 
+### Sub-Section "regionScope" <a id="region_scope"></a>
 In the **SEMPER Core Security** module you can specify the target regions to configure AWS Config Rules, AWS Event Rules and Security Hub customizations. 
 The section "regionScope" allows you per policy to override this settings using the [AWS region names](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions):
 
