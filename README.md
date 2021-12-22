@@ -55,48 +55,23 @@ policy_repository
 The SEMPER Policies always have the following sections
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
-  "metaData" *optional but recommended*: {
-    // here you can provide any attributes helping you to organize your policies.
-    // e.g. versioning, title, description, policy-type, ownership 
-  },
-  // policy-type specific section 
+  "metaData": {...},
   "configure" or "filtering" or "enrichment": {
-    "policyScope": *optional* {
-      ...
-    }
+    "policyScope": {...},
     ...
   },
-  "sfkhjsf" *optional but recommended*: {
-    // here you can provide any attributes helping you to organize your policies.
-    // e.g. versioning, title, description, policy-type, ownership 
-    // 
-  }
+  "auditing": {...}
 }
 ```
-{{<table "table table-striped table-bordered">}}
-| Domain | Account Typ | Beschreibung |
-| ---   | :---  | :---  |
-{{</table>}}
+| Key | Value-Type | Comment |
+| :---   | :---  | :---  |
+| metaData | dict | (optional but recommended): here you can provide any attributes helping you to organize your policies. <br>e.g. versioning, title, description, policy-type, ownership  |
+| configure *or* filtering *or* enrichment | dict | here you can provide any attributes helping you to organize your policies. e.g. versioning, title, description, policy-type, ownership  |
+|policyScope | dict | (optional)   |
+|auditing | dict | (optional but recommended) here you can provide any attributes helping you to audit and reasses your policies. <br>  e.g. lastAttestationDate, contact-details of auditor |
 
 
-metaData (optional but recommended): here you can provide any attributes helping you to organize your policies. e.g. versioning, title, description, policy-type, ownership 
-  },
-  // policy-type specific section 
-  "configure" or "filtering" or "enrichment": {
-    "policyScope": *optional* {
-      ...
-    }
-    ...
-  },
-  "sfkhjsf" *optional but recommended*: {
-    // here you can provide any attributes helping you to organize your policies.
-    // e.g. versioning, title, description, policy-type, ownership 
-    // 
-  }
-}
-```
-
-## Section "policyScope" {#policy_scope}
+<a id="policy_scope"></a>## Section "policyScope" {#policy_scope}
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied. 
 If a member account is in scope you can determine based on account-context like:
 - AWS account ID
@@ -110,21 +85,29 @@ All elements of the policyScope-Section are optional.
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
     ...
-    "policyScope" *optional*: {
-      "accountScope" *optional*: {
-        "exclude" *optional*: "*" or {...},
-        "forceInclude" *optional*: {
-            ...
-        }
+    "policyScope": {
+      "accountScope": {
+        "exclude": "*" or {...},
+        "forceInclude": {...}
       },
-      "regionScope" *optional*: {
-        "exclude" *optional*: "*" or ['string'],
-        "forceInclude" *optional*: ['string']
+      "regionScope": {
+        "exclude": "*" or ['string'],
+        "forceInclude": ['string']
       }
     }
     ...
 }
 ```
+| Key | Value-Type | Comment |
+| :---   | :---  | :---  |
+| policyScope | dict | (optional): here you can provide any attributes helping  |
+| >accountScope | dict | (optional) here you can provide any attributes helping |
+| >>exclude | "*" or dict | (optional) here you can provide any attributes helping  |
+| >>forceInclude | dict | (optional) here you can provide any attributes helping |
+| >regionScope | dict | (optional) details will be described herehere you can provide any attributes helping |
+| >>exclude | "*" or list | (optional) here you can provide any attributes helping  |
+| >>forceInclude | list | (optional) here you can provide any attributes helping |
+
 
 ### Sub-Section "accountScope" {#account_scope}
 The section "accountScope" allows you to exclude accounts based on specific context-information, which is:
