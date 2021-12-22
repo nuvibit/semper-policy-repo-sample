@@ -1,4 +1,4 @@
-# Content
+# Content <a id="top"></a>
 - [Intro](#intro)  
 - [SEMPER Policy-Repository](#policy_repository)  
 - [SEMPER Policy-Elements](#policy_elements)  
@@ -17,11 +17,11 @@
 
 
 
-# Intro <a id="intro"></a>
+# Intro <a id="intro"></a> [🠕](#top)
 Everything in SEMPER is managed via the policies stored in the SEMPER policy repository in the Core Security account.
 The format of the policies is JSON.
 
-#SEMPER Policy-Repository <a id="policy_repository"></a>
+#SEMPER Policy-Repository <a id="policy_repository"></a> [🠕](#top)
 The following folder-structure is required for SEMPER and may not be altered.
 In the folders with the "..." you may place your policy-json files.
 In case you like to disable policies, just create a further sub-folder (e.g. /disabled) and move the policies you like to disable to there.
@@ -60,7 +60,7 @@ policy_repository
     │   ...
 ```
 
-#SEMPER Policy-Elements <a id="policy_elements"></a>
+# SEMPER Policy-Elements <a id="policy_elements"></a> [🠕](#top)
 The SEMPER Policies always have the following sections
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
@@ -80,7 +80,7 @@ The SEMPER Policies always have the following sections
 |auditing | object | (optional but recommended) here you can provide any attributes helping you to audit and reasses your policies. <br>  e.g. lastAttestationDate, contact-details of auditor |
 
 
-## Section "policyScope" <a id="policy_scope"></a>
+## Section "policyScope" <a id="policy_scope"></a> [🠕](#top)
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied.
 The policyScope-Section allows you to specify 
 - an account-scope given through AWS account ID, OU-ID and AWS account-tags (managed via the Organization Management Account) 
@@ -114,7 +114,7 @@ The policyScope-Section allows you to specify
 | >>exclude | "*" or array of string | (optional) todo |
 | >>forceInclude | array of string | (optional) todo |
 
-### Sub-Section "accountScope" <a id="account_scope"></a>
+### Sub-Section "accountScope" <a id="account_scope"></a> [🠕](#top)
 If a member account should be in scope scope you can determine based on the account-context information:
 - AWS account ID
 - OU-ID
@@ -228,7 +228,7 @@ Sample:
 }
 ```
 
-### Sub-Section "regionScope" <a id="region_scope"></a>
+### Sub-Section "regionScope" <a id="region_scope"></a> [🠕](#top)
 In the **SEMPER Core Security** module you can specify the target regions to configure AWS Config Rules, AWS Event Rules and Security Hub customizations. 
 The section "regionScope" allows you per policy to override this settings using the [AWS region names](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions):
 
@@ -269,13 +269,13 @@ Sample:
 }
 ```
 
-#SEMPER Policy-Types <a id="policy_types"></a>
+# SEMPER Policy-Types <a id="policy_types"></a> [🠕](#top)
 SEMPER distinguishes between different policy types.
 - Configure-Policies
 - Filter-Policies
 - Enrichment-Policies
 
-##Configure-Policies <a id="policy_type_configure"></a>
+## Configure-Policies <a id="policy_type_configure"></a> [🠕](#top)
 SEMPER will crawl through all accounts in your AWS Organization and assume the SEMPER Member role in the each account.
 Each account-context (AWS account id, OU-ID, AWS account tags) will be determined.
 Then SEMPER will iterate through all policies in the folders: 
@@ -284,7 +284,8 @@ Then SEMPER will iterate through all policies in the folders:
 
 With the optional "policyScope" provided in Configure-Policies you can specify, if the configure-policy will be applied to the current member account.
 The configure-action specified in the policy will only be applied if the optional policyScope evaluates to "True".
-### AWS Config Rule Policies <a id="policy_type_configure_config"></a>
+
+### AWS Config Rule Policies <a id="policy_type_configure_config"></a> [🠕](#top)
 Folder: /10_configure/config_rules
 This policies allow you to provision custom AWS Config Rules to your member accounts.
 SEMPER uses boto3 [ConfigService.Client.put_config_rule](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule) for this feature. 
@@ -339,7 +340,7 @@ configRuleSettings
 ```
 
 
-### AWS EventBridge Rule Policies <a id="policy_type_configure_eventbridge"></a>
+### AWS EventBridge Rule Policies <a id="policy_type_configure_eventbridge"></a> [🠕](#top)
 Folder: /10_configure/event_rules
 This policies allow you to provision custom AWS EventBridge Rules to your member accounts.
 SEMPER uses boto3 [Events.Client.put_rule](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule) for this feature. 
@@ -361,11 +362,11 @@ SEMPER uses boto3 [Events.Client.put_rule](https://boto3.amazonaws.com/v1/docume
 ```
 The eventPattern has to follow this AWS specification: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
 
-### AWS Security Hub Configuration Policies <a id="policy_type_configure_securityhub"></a>
+### AWS Security Hub Configuration Policies <a id="policy_type_configure_securityhub"></a> [🠕](#top)
 will follow
 
 
-##Filter-Policies  <a id="policy_type_filter"></a>
+## Filter-Policies  <a id="policy_type_filter"></a> [🠕](#top)
 SEMPER will aggregate all the security events from AWS the provisioned SEMPER AWS Config- and AWS EventBridge Rules (API calls via CloudTrail) and also the AWS Security Hub- and Amazon GuardDuty findings and forwards them to one SEMPER Processing Lambda in your Core Security account.
 This SEMPER Processing Lambda will determine the account-context (OU-ID, AWS account tags) based on the AWS account ID the Security Finding originates from.
 Depending on the source (AWS Event, AWS Security Hub or Amazon GuardDuty) SEMPER will iterate through all filtering policies in the following folders:
@@ -375,10 +376,9 @@ Depending on the source (AWS Event, AWS Security Hub or Amazon GuardDuty) SEMPER
 
 Then the Processing Lambda Filtering-Policies will be applied to the Security-Finding.
 
-
-Each account-context (account-id, OU-ID, account-tags) will be determined.
-Then it will iterate through all policies in the folders:
-/10_configure/config_rules
-/10_configure/securityhub_findings
-
 A Filtering-Policy can be equipped with a policyScope section.
+### AWS CloudTrail API Filter Policies <a id="policy_type_filter_ct"></a> [🠕](#top)
+
+### AWS Security Hub Filter Policies <a id="policy_type_filter_securityhub"></a> [🠕](#top)
+
+### Amazon GuardDuty Filter Policies <a id="policy_type_filter_guardduty"></a> [🠕](#top)
