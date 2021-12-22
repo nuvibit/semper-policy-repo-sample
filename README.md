@@ -71,7 +71,7 @@ The SEMPER Policies always have the following sections
 |auditing | dict | (optional but recommended) here you can provide any attributes helping you to audit and reasses your policies. <br>  e.g. lastAttestationDate, contact-details of auditor |
 
 
-<a id="policy_scope"></a>## Section "policyScope" {#policy_scope}
+## Section "policyScope"<a id="policy_scope"></a>
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied. 
 If a member account is in scope you can determine based on account-context like:
 - AWS account ID
