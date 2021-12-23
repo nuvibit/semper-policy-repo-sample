@@ -151,8 +151,8 @@ The section *accountScope* allows you to **exclude** accounts and in a second st
       ...
 }
 ```
-| Key               | Value-Type | Comment |
-| :---              | :---   | :---  |
+| Key            | Value-Type | Comment |
+| :---           | :---   | :---  |
 | >accountScope  | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
 | >>exclude      | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
 | >>>accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
@@ -266,11 +266,11 @@ SEMPER uses boto3 [ConfigService.Client.put_config_rule](https://boto3.amazonaws
   ...
 }
 ```
-| Key | Value-Type | Comment |
-| :---   | :---  | :---  |
-| >policyScope | object | (optonal) as described in this chapter [Section policyScope](#policy_scope). |
+| Key                 | Value-Type | Comment |
+| :---                | :---  | :---  |
+| >policyScope        | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
 | >configRuleSettings | object | specifying the attributes used for the boto3 call. |
-| >>configRuleName | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with "semper-".|
+| >>configRuleName    | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with ***semper-***.|
 | >>configRuleDescription | string | according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification. |
 | >>complianceResourceTypes | array of string | according to boto3 [Scope.ComplianceResourceTypes](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification |
 | >>coreSecurityEvalLambdaName | string | name of the custom evaluation Lambda valid for this Config Rule. <br> The custom evaluation Lambda you provide in the SEMPER Core Security account. |
@@ -295,13 +295,13 @@ SEMPER uses boto3 [Events.Client.put_rule](https://boto3.amazonaws.com/v1/docume
   ...
 }
 ```
-| Key | Value-Type | Comment |
-| :---   | :---  | :---  |
-| >policyScope | object | (optonal) as described in this chapter [Section policyScope](#policy_scope). |
-| >eventSettings | object | specifying the attributes used for the boto3 call. |
-| >>eventName | string | according to boto3 [Name](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule)-specification - will be prefixed with "semper-".|
+| Key                | Value-Type | Comment |
+| :---               | :---  | :---  |
+| >policyScope       | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
+| >eventSettings     | object | specifying the attributes used for the boto3 call. |
+| >>eventName        | string | according to boto3 [Name](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule)-specification - will be prefixed with "semper-".|
 | >>eventDescription | string | according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule)-specification. |
-| >>eventPattern | array of string | The eventPattern has to follow this AWS specification: [Amazon EventBridge event patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) |
+| >>eventPattern     | array of string | The eventPattern has to follow this AWS specification: [Amazon EventBridge event patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) |
 
 ### AWS Security Hub Configuration Policies <a id="policy_type_configure_securityhub"></a> [🔝](#top)
 will follow
@@ -309,11 +309,13 @@ will follow
 
 ## Filter-Policies  <a id="policy_type_filter"></a> [🔝](#top)
 SEMPER will aggregate all the security events from AWS the provisioned SEMPER AWS Config- and AWS EventBridge Rules (API calls via CloudTrail) and also the AWS Security Hub- and Amazon GuardDuty findings and forwards them to one SEMPER Processing Lambda in your Core Security account.
+
 This SEMPER Processing Lambda will determine the account-context (OU-ID, AWS account tags) based on the AWS account ID the Security Finding originates from.
+
 Depending on the source (AWS Event, AWS Security Hub or Amazon GuardDuty) SEMPER will iterate through all filtering policies in the following folders:
-> /20_filtering/cloudtrail_api_calls
-> /20_filtering/guardduty_findings
-> /20_filtering/securityhub_findings
+>Folder: /20_filtering/cloudtrail_api_calls <br>
+>Folder: /20_filtering/guardduty_findings <br>
+>Folder: /20_filtering/securityhub_findings
 
 Then the Processing Lambda Filtering-Policies will be applied to the Security-Finding.
 
@@ -328,10 +330,10 @@ The generic structure of a SEMPER Filter-Policy looks like this:
   ...
 }
 ```
-| Key | Value-Type | Comment |
-| :---   | :---  | :---  |
-| >filtering | object | |
-| >policyScope | object | (optional) Each Security Finding has an originating account and an AWS region of the emitting resource. <br>As described in this chapter [Section policyScope](#policy_scope) you can limit the application of a SEMPER policy to a specific account- and region-context which in case of a Finding-Policy is given through the Finding.OriginatingAccountContext or Finding.OriginatingRegion |
+| Key             | Value-Type | Comment |
+| :---            | :---  | :---  |
+| >filtering      | object | |
+| >policyScope    | object | (optional) Each Security Finding has an originating account and an AWS region of the emitting resource. <br>As described in this chapter [Section policyScope](#policy_scope) you can limit the application of a SEMPER policy to a specific account- and region-context which in case of a Finding-Policy is given through the Finding.OriginatingAccountContext or Finding.OriginatingRegion |
 | >findingPattern | object | The specification of the findingPattern follows the AWS specification for eventPattern: Amazon EventBridge event patterns. |
 
 A Filtering-Policy can be equipped with a policyScope section.
@@ -344,5 +346,5 @@ A Filtering-Policy can be equipped with a policyScope section.
 ### Amazon GuardDuty Filter Policies <a id="policy_type_filter_guardduty"></a> [🔝](#top)
 > Folder: /20_filtering/guardduty_findings
 
-## Enrichment-Policies  <a id="policy_type_enrichment"></a> [🔝](#top)
+## Enrichment-Policies <a id="policy_type_enrichment"></a> [🔝](#top)
 will follow
