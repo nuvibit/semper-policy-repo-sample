@@ -111,12 +111,12 @@ Syntax Keywords:
 | Key | Value-Type | Comment |
 | :---   | :---  | :---  |
 | policyScope | object | necessary for each new rule |
-| > accountScope | object | (optional) see [accountScope](#account_scope) |
-| >> exclude | "*" or object | (optional) |
-| >> forceInclude | object | (optional) |
-| > regionScope | object | (optional) see [regionScope](#region_scope) |
-| >> exclude | "*" or array of string | (optional) |
-| >> forceInclude | array of string | (optional) |
+| >accountScope | object | (optional) see [accountScope](#account_scope) |
+| >>exclude | "*" or object | (optional) |
+| >>forceInclude | object | (optional) |
+| >regionScope | object | (optional) see [regionScope](#region_scope) |
+| >>exclude | "*" or array of string | (optional) |
+| >>forceInclude | array of string | (optional) |
 
 ### Sub-Section "accountScope" <a id="account_scope"></a> [🔝](#top)
 If a member account should be in scope scope you can determine based on the account-context information:
@@ -153,19 +153,19 @@ The section *accountScope* allows you to **exclude** accounts and in a second st
 ```
 | Key | Value-Type | Comment |
 | :---   | :---  | :---  |
-| >&nbsp;accountScope | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
-| >> exclude | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>> accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| >>> ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| >>> accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>> tag-key-1 | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
-| >>>> tag-key-2 | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
-| >> forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
-| >>> accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| >>> ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| >>> accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>> tag-key-3 | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
-| >>>> tag-key-4 | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
+| >accountScope | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
+| >>exclude | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| >>>ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| >>>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>>tag-key-1 | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
+| >>>>tag-key-2 | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
+| >>forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
+| >>>accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| >>>ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| >>>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>>tag-key-3 | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
+| >>>>tag-key-4 | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
 
 #### Sample
 For example you can **exclude** all accounts and **forceInclude** the Organization Management Account based on the assigned account-tag:
