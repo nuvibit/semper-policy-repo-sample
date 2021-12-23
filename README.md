@@ -20,43 +20,43 @@ This is the documentation of the SEMPER configuration and policy language.
 
 # Intro <a id="intro"></a> [🔝](#top)
 Everything in SEMPER is managed via the policies stored in the SEMPER policy repository in the Core Security account.
-The technical format of the policies is in [JSON](https://en.wikipedia.org/wiki/JSON).
+The technical format of the policies is [JSON](https://en.wikipedia.org/wiki/JSON).
 
 # SEMPER Policy-Repository <a id="policy_repository"></a> [🔝](#top)
 The following folder-structure is required for SEMPER and may not be altered.
-In the folders with the "..." you may place your policy-json files.
-In case you like to disable policies, just create a further sub-folder (e.g. /disabled) and move the policies you like to disable to there.
+In the folders marked with "..." you may place your own policy-json files.
+If you want to disable policies, just create another subfolder (e.g. /disabled) and move the (given) policies you want to disable there.
 ```
-policy_repository
+policy_repository/
 │   README.md
 │
-├───10_configure
+├───10_configure/
 │   │   securityhub.json
-│   ├───config_rules
+│   ├───config_rules/
 │   │   │   semper_policy.json
 │   │   │   ...
-│   │   ├───disabled
+│   │   ├───disabled/
 │   │   │   disabled_policy.json
 │   │   │   ...
 │   │
-│   └───event_rules
+│   └───event_rules/
 │       │   semper_policy.json
 │       │   ...
 │
-├───20_filtering
-│   ├───cloudtrail_api_calls
+├───20_filtering/
+│   ├───cloudtrail_api_calls/
 │   │   │   semper_policy.json
 │   │   │   ...
 │   │
-│   ├───guardduty_findings
+│   ├───guardduty_findings/
 │   │   │   semper_policy.json
 │   │   │   ...
 │   │
-│   ├───securityhub_findings
+│   ├───securityhub_findings/
 │   │   │   semper_policy.json
 │   │   │   ...
 │
-└───30_enrichment
+└───30_enrichment/
     │   semper_policy.json
     │   ...
 ```
@@ -75,10 +75,10 @@ The SEMPER Policies always have the following sections
 ```
 | Key | Value-Type | Comment |
 | :---   | :---  | :---  |
-| metaData | object | (optional but recommended): here you can provide any attributes helping you to organize your policies. <br> e.g. versioning, title, description, policy-type, ownership  |
-| configure *or* filtering *or* enrichment | object | here you can provide any attributes helping you to organize your policies. <br> e.g. versioning, title, description, policy-type, ownership  |
-|policyScope | object | (optional) as described in this chapter [Section policyScope](#policy_scope) |
-|auditing | object | (optional but recommended) here you can provide any attributes helping you to audit and reasses your policies. <br>  e.g. lastAttestationDate, contact-details of auditor |
+| metaData | object | (optional but recommended): provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*  |
+| configure *or* filtering *or* enrichment | object | provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*  |
+|policyScope | object | (optional) as described in the following chapter [Section policyScope](#policy_scope) |
+|auditing | object | (optional but recommended) provide here any attributes helping you to audit and reasses your policies. <br> *e.g. lastAttestationDate, contact-details of auditor*  |
 
 
 ## Section "policyScope" <a id="policy_scope"></a> [🔝](#top)
