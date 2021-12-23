@@ -151,21 +151,21 @@ The section *accountScope* allows you to **exclude** accounts and in a second st
       ...
 }
 ```
-| Key | Value-Type | Comment |
-| :---   | :---  | :---  |
-| >accountScope | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
-| >>exclude | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| >>>ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| >>>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>>tag-key-1 | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
-| >>>>tag-key-2 | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
-| >>forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
-| >>>accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| >>>ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| >>>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>>tag-key-3 | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
-| >>>>tag-key-4 | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
+| Key               | Value-Type | Comment |
+| :---              | :---   | :---  |
+| `> accountScope`  | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
+| `>> exclude`      | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
+| `>>> accountId`   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| `>>> ouId`        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| `>>> accountTags` | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| `>>>> tag-key-1`  | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
+| `>>>> tag-key-2`  | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
+| `>> forceInclude` | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
+| `>>> accountId`   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| `>>> ouId`        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| `>>> accountTags` | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| `>>>> tag-key-3`  | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
+| `>>>> tag-key-4`  | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
 
 #### Sample
 For example you can **exclude** all accounts and **forceInclude** the Organization Management Account based on the assigned account-tag:
@@ -190,8 +190,8 @@ For example you can **exclude** all accounts and **forceInclude** the Organizati
 ```
 
 ### Sub-Section "regionScope" <a id="region_scope"></a> [🔝](#top)
-In the **SEMPER Core Security** module you can specify the target regions where SEMPER will provision AWS Config Rules, AWS EventBus Rules and customize Security Hub in the member accounts.
-The section "regionScope" allows you per policy to override this settings using the [AWS region names](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions):
+In the **SEMPER Core Security** module you can specify the target regions where SEMPER will provision *AWS Config Rules*, *AWS EventBus Rules* and customize *AWS Security Hub* in the member accounts.
+The section **regionScope** allows you per policy to override this settings using the [AWS region names](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions) (e.g. eu-central-1, us-west-2, more examples see below):
 
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
@@ -203,14 +203,14 @@ The section "regionScope" allows you per policy to override this settings using 
       ...
 }
 ```
-| Key | Value-Type | Comment |
-| :---   | :---  | :---  |
-| >regionScope | object | (optional) first the optional "exclude"-section is evaluated, then the optional "forceInclude" section. |
-| >>exclude | "*" or array of string | (optional) the elements in this section are evaluated using a logical OR. |
-| >>forceInclude | array of string | (optional) the elements in this section are evaluated using a logical OR. |
+| Key               | Value-Type | Comment |
+| :---              | :---  | :---  |
+| `> regionScope`   | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
+| `>> exclude`      | "*" or array of string | (optional) the elements in this section are evaluated using a *logical OR*. |
+| `>> forceInclude` | array of string | (optional) the elements in this section are evaluated using a *logical OR*. |
 
 #### Sample
-For example you can "exclude" all regions and "forceInclude" one specific region (take care that SCPs might prevent resources in regions):
+For example you can **exclude** all regions and **forceInclude** one specific region (take care that [SCPs](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) might prevent resources in regions):
 ```json {linenos=table,hl_lines=[],linenostart=50}
 Sample:
 {
@@ -229,17 +229,17 @@ Sample:
 ```
 
 # SEMPER Policy-Types <a id="policy_types"></a> [🔝](#top)
-SEMPER distinguishes between different policy types.
-- Configure-Policies
-- Filter-Policies
-- Enrichment-Policies
+SEMPER distinguishes between different policy types:
+- [Configure-Policies](#policy_type_configure)
+- [Filter-Policies](#policy_type_filter)
+- [Enrichment-Policies](#policy_type_enrichment)
 
 ## Configure-Policies <a id="policy_type_configure"></a> [🔝](#top)
 SEMPER will crawl through all accounts in your AWS Organization and assume the SEMPER Member role in the each account.
 Each account-context (AWS account id, OU-ID, AWS account tags) will be determined.
 Then SEMPER will iterate through all policies in the folders:
-> /10_configure/config_rules
-> /10_configure/event_rules
+> Folder: /10_configure/config_rules
+> Folder: /10_configure/event_rules
 
 With the optional "policyScope" provided in Configure-Policies you can specify, if the configure-policy will be applied to the current member account.
 The configure-action specified in the policy will only be applied if the optional policyScope evaluates to "True".
