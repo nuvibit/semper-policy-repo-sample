@@ -239,8 +239,7 @@ SEMPER will crawl through all accounts in your AWS Organization and assume the S
 Each account-context (AWS account id, OU-ID, AWS account tags) will be determined.
 
 Then SEMPER will iterate through all policies in the folders:
-
-> Folder: /10_configure/config_rules
+> Folder: /10_configure/config_rules <br>
 > Folder: /10_configure/event_rules
 
 With the optional **policyScope** provided in Configure-Policies you can specify, if the configure-policy will be applied to the current member account.
