@@ -85,7 +85,9 @@ The SEMPER Policies always have the following sections and syntax:
 ## Section "policyScope" <a id="policy_scope"></a> [🔝](#top)
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied.
 
+<p align="center">
 ![aws-organization-account-model](docs/aws-organization-account-model.png)
+</p>
 
 The *policyScope-Section* allows you to specify
 - an **account-scope** given through *AWS account ID*, *OU-ID* and *AWS account-tags* (managed via the Organization Management Account)
