@@ -237,12 +237,14 @@ SEMPER distinguishes between different policy types:
 ## Configure-Policies <a id="policy_type_configure"></a> [🔝](#top)
 SEMPER will crawl through all accounts in your AWS Organization and assume the SEMPER Member role in the each account.
 Each account-context (AWS account id, OU-ID, AWS account tags) will be determined.
+
 Then SEMPER will iterate through all policies in the folders:
+
 > Folder: /10_configure/config_rules
 > Folder: /10_configure/event_rules
 
-With the optional "policyScope" provided in Configure-Policies you can specify, if the configure-policy will be applied to the current member account.
-The configure-action specified in the policy will only be applied if the optional policyScope evaluates to "True".
+With the optional **policyScope** provided in Configure-Policies you can specify, if the configure-policy will be applied to the current member account.
+The configure-action specified in the policy will only be applied if the optional policyScope evaluates to `true`.
 
 ### AWS Config Rule Policies <a id="policy_type_configure_config"></a> [🔝](#top)
 > Folder: /10_configure/config_rules
