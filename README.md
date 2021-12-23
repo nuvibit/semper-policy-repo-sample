@@ -35,6 +35,7 @@ policy_repository/
 │   ├───config_rules/
 │   │   │   semper_policy.json
 │   │   │   ...
+│   │   │
 │   │   ├───disabled/
 │   │   │   disabled_policy.json
 │   │   │   ...
@@ -62,7 +63,7 @@ policy_repository/
 ```
 
 # SEMPER Policy-Elements <a id="policy_elements"></a> [🔝](#top)
-The SEMPER Policies always have the following sections
+The SEMPER Policies always have the following sections and syntax:
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
   "metaData": {...},
@@ -76,18 +77,19 @@ The SEMPER Policies always have the following sections
 | Key | Value-Type | Comment |
 | :---   | :---  | :---  |
 | metaData | object | (optional but recommended): provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*  |
-| configure *or* filtering *or* enrichment | object | provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*  |
+| configure *or* <br> filtering *or* <br> enrichment | object | provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*  |
 |policyScope | object | (optional) as described in the following chapter [Section policyScope](#policy_scope) |
 |auditing | object | (optional but recommended) provide here any attributes helping you to audit and reasses your policies. <br> *e.g. lastAttestationDate, contact-details of auditor*  |
 
 
 ## Section "policyScope" <a id="policy_scope"></a> [🔝](#top)
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied.
-The policyScope-Section allows you to specify
-- an account-scope given through AWS account ID, OU-ID and AWS account-tags (managed via the Organization Management Account)
-- and a region-scope given through the region of an AWS resource.
 
 ![aws-organization-account-model](docs/aws-organization-account-model.png)
+
+The *policyScope-Section* allows you to specify
+- an **account-scope** given through *AWS account ID*, *OU-ID* and *AWS account-tags* (managed via the Organization Management Account)
+- and a **region-scope** given through the *region code* of an AWS resource.
 
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
@@ -108,10 +110,10 @@ The policyScope-Section allows you to specify
 | Key | Value-Type | Comment |
 | :---   | :---  | :---  |
 | policyScope | object | (optional): todo |
-| >accountScope | object | (optional) todo |
+| >accountScope | object | (optional) region code of AWS region, see [accountScope](#account_scope) |
 | >>exclude | "*" or object | (optional) todo |
 | >>forceInclude | object | (optional) todo |
-| >regionScope | object | (optional) todo |
+| >regionScope | object | (optional) region code of AWS region, see [regionScope](#region_scope)  |
 | >>exclude | "*" or array of string | (optional) todo |
 | >>forceInclude | array of string | (optional) todo |
 
@@ -121,7 +123,7 @@ If a member account should be in scope scope you can determine based on the acco
 - OU-ID
 - AWS account-tags (managed via the Organization Management Account)
 
-The section "accountScope" allows you to "exclude" accounts and in a second step to "forceInclude" accounts based on specific account-context information:
+The section *accountScope* allows you to **exclude** accounts and in a second step to **forceInclude** accounts based on specific account-context information (technically in the sense how it is implemented in the tool *rsync* as well):
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
       ...
@@ -130,8 +132,8 @@ The section "accountScope" allows you to "exclude" accounts and in a second step
           "accountId": ['string'],
           "ouId": ['string'],
           "accountTags": {
-              'tag-key1-string': ['tag-value1-string'],
-              'tag-key2-string': ['tag-value2-string'],
+              'tag-key-1-string': ['tag-value-1-string'],
+              'tag-key-2-string': ['tag-value-2-string'],
               ...
           }
         },
@@ -139,8 +141,8 @@ The section "accountScope" allows you to "exclude" accounts and in a second step
           "accountId": ['string'],
           "ouId": ['string'],
           "accountTags": {
-              'tag-key1-string': ['tag-value1-string'],
-              'tag-key2-string': ['tag-value2-string'],
+              'tag-key-3-string': ['tag-value-3-string'],
+              'tag-key-4-string': ['tag-value-4-string'],
               ...
           }
         }
@@ -150,22 +152,22 @@ The section "accountScope" allows you to "exclude" accounts and in a second step
 ```
 | Key | Value-Type | Comment |
 | :---   | :---  | :---  |
-| >accountScope | object | (optional) first the optional "exclude"-section is evaluated, then the optional "forceInclude" section. |
-| >>exclude | "*" or object | (optional) the elements in this section are evaluated using a logical AND. |
-| >>>accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a logical OR. |
-| >>>ouId | array of string | (optional) the elements in this array are evaluated using a logical OR. |
-| >>>accountTags | dict | (optional) the elements in this section are evaluated using a logical AND. |
-| >>>>tag-key1 | array of string | Value of account-tag 1. The elements in this array are evaluated using a logical OR. |
-| >>>>tag-key2 | array of string | Value of account-tag 2. The elements in this array are evaluated using a logical OR. |
-| >>forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already  excluded accounts can be readded again via this section. <br> The elements in this section are evaluated using a logical AND. |
-| >>>accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a logical OR. |
-| >>>ouId | array of string | (optional) the elements in this array are evaluated using a logical OR. |
-| >>>accountTags | dict | (optional) the elements in this section are evaluated using a logical AND. |
-| >>>>tag-key1 | array of string | Value of account-tag 1. The elements in this array are evaluated using a logical OR. |
-| >>>>tag-key2 | array of string | Value of account-tag 2. The elements in this array are evaluated using a logical OR. |
+| > accountScope | object | (optional) first the optional **exclude**-section is evaluated, then the optional "forceInclude" section. |
+| >> exclude | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>> accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| >>> ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| >>> accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>> tag-key-1 | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
+| >>>> tag-key-2 | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
+| >> forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already  excluded accounts can be readded again via this section. <br> The elements in this section are evaluated using a *logical AND*. |
+| >>> accountId | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| >>> ouId | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| >>> accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>> tag-key-3 | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
+| >>>> tag-key-4 | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
 
 #### Sample
-For example you can "exclude" all accounts and "forceInclude" the Organization Management Account based on the assigned account-tag:
+For example you can **exclude** all accounts and **forceInclude** the Organization Management Account based on the assigned account-tag:
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
     ...
