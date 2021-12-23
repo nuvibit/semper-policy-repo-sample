@@ -108,15 +108,15 @@ The *policyScope-Section* allows you to specify
 }
 Syntax Keywords:
 ```
-| Key | Value-Type | Comment |
-| :---   | :---  | :---  |
-| policyScope | object | necessary for each new rule |
-| >accountScope | object | (optional) see [accountScope](#account_scope) |
-| >>exclude | "*" or object | (optional) |
-| >>forceInclude | object | (optional) |
-| >regionScope | object | (optional) see [regionScope](#region_scope) |
-| >>exclude | "*" or array of string | (optional) |
-| >>forceInclude | array of string | (optional) |
+| Key               | Value-Type             | Comment |
+| :---              | :---                   | :---  |
+| `policyScope`     | object                 | necessary for each new rule |
+| `> accountScope`  | object                 | (optional) see [accountScope](#account_scope) |
+| `>> exclude`      | "*" or object          | (optional) |
+| `>> forceInclude` | object                 | (optional) |
+| `> regionScope`   | object                 | (optional) see [regionScope](#region_scope) |
+| `>> exclude`      | "*" or array of string | (optional) |
+| `>> forceInclude` | array of string        | (optional) |
 
 ### Sub-Section "accountScope" <a id="account_scope"></a> [🔝](#top)
 If a member account should be in scope scope you can determine based on the account-context information:
