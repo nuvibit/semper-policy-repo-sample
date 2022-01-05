@@ -1,4 +1,5 @@
 This is the documentation of the SEMPER configuration and policy language.
+Required Semper Module Version: >= 1.0
 
 # Content <a id="top"></a>
 - [Intro](#intro)
@@ -82,7 +83,7 @@ The SEMPER Policies always have the following sections:
 | Key        | Value-Type | Comment |
 | :---       | :---  | :---  |
 | metaData   | object | (optional but recommended): provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*   |
-| configure *or* <br> filtering *or* <br> enrichment | object | provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*  |
+| configure *or* <br> filtering *or* <br> enrichment | object | Contains the optional policyScope-section and the typeSpecificSection. |
 |>policyScope | object | (optional) as described in the following chapter [Section policyScope](#policy_scope). |
 |>typeSpecificSection | object | will be described in the chapter [SEMPER Policy-Types](#policy_types). |
 |auditing    | object | (optional but recommended) provide here any attributes helping you to audit and reasses your policies. <br> *e.g. lastAttestationDate, contact-details of auditor*  |
@@ -136,17 +137,16 @@ The *policyScope-Section* allows you to specify
     }
     ...
 }
-Syntax Keywords:
 ```
 | Key            | Value-Type             | Comment |
 | :---           | :---                   | :---  |
 | policyScope    | object                 | necessary for each new rule |
-| >accountScope  | object                 | (optional) see [accountScope](#account_scope) |
-| >>exclude      | "*" or object          | (optional) |
-| >>forceInclude | object                 | (optional) |
-| >regionScope   | object                 | (optional) see [regionScope](#region_scope) |
-| >>exclude      | "*" or array of string | (optional) |
-| >>forceInclude | array of string        | (optional) |
+| accountScope  | object                 | (optional) see [accountScope](#account_scope) |
+| .exclude      | "*" or object          | (optional) |
+| .forceInclude | object                 | (optional) |
+| regionScope   | object                 | (optional) see [regionScope](#region_scope) |
+| .exclude      | "*" or array of string | (optional) |
+| .forceInclude | array of string        | (optional) |
 
 ### Sub-Section "accountScope" <a id="account_scope"></a> [🔝](#top)
 If a member account should be in scope scope you can determine based on the account-context information:
@@ -183,19 +183,19 @@ The section *accountScope* allows you to **exclude** accounts and in a second st
 ```
 | Key            | Value-Type | Comment |
 | :---           | :---   | :---  |
-| >accountScope  | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
-| >>exclude      | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| >>>ouId        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| >>>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>>tag-key-1  | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
-| >>>>tag-key-2  | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
-| >>forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
-| >>>accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| >>>ouId        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| >>>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
-| >>>>tag-key-3  | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
-| >>>>tag-key-4  | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
+| accountScope  | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
+| >exclude      | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| >>ouId        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| >>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>tag-key-1  | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
+| >>>tag-key-2  | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
+| >forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
+| >>accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| >>ouId        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| >>accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| >>>tag-key-3  | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
+| >>>tag-key-4  | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
 
 ### Sub-Section "regionScope" <a id="region_scope"></a> [🔝](#top)
 In the **SEMPER Core Security** module you can specify the target regions where SEMPER will provision *AWS Config Rules*, *AWS EventBus Rules* and customize *AWS Security Hub* in the member accounts.
@@ -213,9 +213,9 @@ The section **regionScope** allows you per policy to override this settings usin
 ```
 | Key            | Value-Type | Comment |
 | :---           | :---  | :---  |
-| >regionScope   | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
-| >>exclude      | "*" or array of string | (optional) the elements in this section are evaluated using a *logical OR*. |
-| >>forceInclude | array of string | (optional) the elements in this section are evaluated using a *logical OR*. |
+| regionScope   | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
+| >exclude      | "*" or array of string | (optional) the elements in this section are evaluated using a *logical OR*. |
+| >forceInclude | array of string | (optional) the elements in this section are evaluated using a *logical OR*. |
 
 ### Samples for "policyScope" <a id="policy_scope_samples"></a> [🠕](#top)
 
@@ -339,12 +339,13 @@ SEMPER uses boto3 [ConfigService.Client.put_config_rule](https://boto3.amazonaws
 ```
 | Key                 | Value-Type | Comment |
 | :---                | :---  | :---  |
-| >policyScope        | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
-| >configRuleSettings | object | specifying the attributes used for the boto3 call. |
-| >>configRuleName    | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with ***semper-***.|
-| >>configRuleDescription | string | according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification. |
-| >>complianceResourceTypes | array of string | according to boto3 [Scope.ComplianceResourceTypes](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification |
-| >>coreSecurityEvalLambdaName | string | name of the custom evaluation Lambda valid for this Config Rule. <br> The custom evaluation Lambda you provide in the SEMPER Core Security account. |
+| configure       | object |  |
+| .policyScope        | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
+| .configRuleSettings | object | specifying the attributes used for the boto3 call. |
+| ..configRuleName    | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with ***semper-***.|
+| ..configRuleDescription | string | according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification. |
+| ..complianceResourceTypes | array of string | according to boto3 [Scope.ComplianceResourceTypes](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification |
+| ..coreSecurityEvalLambdaName | string | name of the custom evaluation Lambda valid for this Config Rule. <br> The custom evaluation Lambda you provide in the SEMPER Core Security account. |
 
 ### AWS EventBridge Rule Policies <a id="policy_type_configure_eventbridge"></a> [🔝](#top)
 > Folder: /10_configure/event_rules
@@ -368,6 +369,7 @@ SEMPER uses boto3 [Events.Client.put_rule](https://boto3.amazonaws.com/v1/docume
 ```
 | Key                | Value-Type | Comment |
 | :---               | :---  | :---  |
+| configure       | object |  |
 | >policyScope       | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
 | >eventSettings     | object | specifying the attributes used for the boto3 call. |
 | >>eventName        | string | according to boto3 [Name](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule)-specification - will be prefixed with "semper-".|
@@ -431,7 +433,7 @@ The generic structure of a SEMPER Filter-Policy looks like this:
         }
       }
     },
-    "eventPattern": {
+    "findingPattern": {
       "detail": {
         "eventSource": [
           "kms.amazonaws.com"
