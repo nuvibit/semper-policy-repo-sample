@@ -28,8 +28,9 @@ SEMPER distinguishes between different policy types that will be described in la
 - [Filter-Policies](#policy_type_filter)
 - [Enrichment-Policies](#policy_type_enrichment)
 
-The following folder-structure is required for SEMPER and may not be altered.
-In the folders marked with "..." you may place your own policy-json files. Please ensure to use the right policy type for the right folder.  
+The following folder-structure is required for SEMPER and may not be altered.<br>
+There is one JSON file per policy.
+In the folders marked with "..." you may place your own policies as JSON files in the respective folder. Please ensure to use the right policy type for the right folder.  
 If you want to disable policies, just create another subfolder (e.g. /disabled) and move the (given) policies you want to disable there.
 ```
 policy_repository/
