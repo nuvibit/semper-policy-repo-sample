@@ -74,7 +74,7 @@ The SEMPER Policies always have the following sections:
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
   "metaData": {...},
-  "configure" or "filtering" or "enrichment": {
+  "configure" | "filtering" | "enrichment": {
     "policyScope": {...},
     ...
     <typeSpecificSection>
@@ -98,7 +98,7 @@ The json objects *policyScope* and *typeSpecificSection* allow a SEMPER syntax t
 | Empty | LastName is empty | "LastName": [""] | "LastName": "" | 
 | Equals | Name is "Alice" | "Name": [ "Alice" ] | "Name": "Alice" | 
 | And | Location is "New York" and Day is "Monday" | "Location": [ "New York" ], "Day": ["Monday"] | "Location": "New York", "Day": "Monday" | 
-| Or | PaymentType is "Credit" or "Debit" | "PaymentType": [ "Credit", "Debit"] | "PaymentType": "Credit" | 
+| Or | PaymentType is "Credit" | "Debit" | "PaymentType": [ "Credit", "Debit"] | "PaymentType": "Credit" | 
 | Not | Weather is anything but "Raining" | "Weather": [ { "anything-but": [ "Raining" ] } ] | "Weather": "Sunny" | 
 | Begins with | Region is in the US | "Region": [ {"prefix": "us-" } ] | "Region": "us-east-1" | 
 <br>
@@ -133,11 +133,11 @@ The *policyScope-Section* allows you to specify
     ...
     "policyScope": {
       "accountScope": {
-        "exclude": "*" or {...},
+        "exclude": "*" | {...},
         "forceInclude": {...}
       },
       "regionScope": {
-        "exclude": "*" or ['string'],
+        "exclude": "*" | ['string'],
         "forceInclude": ['string']
       }
     }
@@ -165,7 +165,7 @@ The section *accountScope* allows you to **exclude** accounts and in a second st
 {
       ...
       "accountScope": {
-        "exclude": "*" or {
+        "exclude": "*" | {
           "accountId": ['string'],
           "ouId": ['string'],
           "accountTags": {
@@ -211,7 +211,7 @@ The section **regionScope** allows you per policy to override this settings usin
 {
       ...
       "regionScope": {
-        "exclude": "*" or ['string'],
+        "exclude": "*" | ['string'],
         "forceInclude": ['string']
       }
       ...
@@ -337,7 +337,9 @@ SEMPER uses boto3 [ConfigService.Client.put_config_rule](https://boto3.amazonaws
       "configRuleName": 'string',
       "configRuleDescription": 'string',
       "complianceResourceTypes": ['string'],
-      "coreSecurityEvalLambdaName": 'string'
+      "sourceOwner": "CUSTOM_LAMBDA" | "AWS",
+      "sourceIdentifier": 'string',
+      "inputParameters ": 'string'
     }
   }
   ...
@@ -348,9 +350,11 @@ SEMPER uses boto3 [ConfigService.Client.put_config_rule](https://boto3.amazonaws
 | .policyScope        | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
 | .configRuleSettings | object | specifying the attributes used for the boto3 call. |
 | . .configRuleName    | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with ***semper-***.|
-| . .configRuleDescription | string | according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification. |
-| . .complianceResourceTypes | array of string | according to boto3 [Scope.ComplianceResourceTypes](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification |
-| . .coreSecurityEvalLambdaName | string | name of the custom evaluation Lambda valid for this Config Rule. <br> The custom evaluation Lambda you provide in the SEMPER Core Security account. |
+| . .configRuleDescription | string | (optional) according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification. |
+| . .complianceResourceTypes | array of string |  (optional) according to boto3 [Scope.ComplianceResourceTypes](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification |
+| . .sourceOwner | string | Either "CUSTOM_LAMBDA" for a custom Lambda function in the Core Security account or "AWS" for AWS managed Config rules. |
+| . .sourceIdentifier | string | If "sourceOwner" is "CUSTOM_LAMBDA", name of the custom evaluation Lambda hosted in the Core Security that is valid for this Config Rule. <br> If "sourceOwner" is "AWS", identifier of the AWS managed rule. List of [AWS Config Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html). E.g. *IAM_PASSWORD_POLICY* |
+| . .inputParameters  | string | (optional) A string, in JSON format, that is passed to the Config rule Lambda function. |
 
 ### AWS EventBridge Rule Policies <a id="policy_type_configure_eventbridge"></a> [🔝](#top)
 > Folder: /10_configure/event_rules
@@ -418,7 +422,8 @@ The generic structure of a SEMPER Filter-Policy looks like this:
 ```json {linenos=table,hl_lines=[],linenostart=50}
 {
   "metaData": {
-    "type": "filter_cloudwatch_event_rule",
+    "domain": "filter",
+    "type": "eventbridge_rule",
     "title": "Ignore KMS events for all environments except 'Production'",
   ...
   },

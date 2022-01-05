@@ -1,7 +1,8 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "configure_eventbridge_rule",
+    "domain": "configure",
+    "type": "eventbridge_rule",
     "title": "CIS AWS 3.14: VPC changes",
     "description": [],
     "owner": {

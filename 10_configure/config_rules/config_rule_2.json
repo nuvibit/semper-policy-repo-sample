@@ -11,13 +11,11 @@
   },
   "configure": {
     "configRuleSettings": {
-      "configRuleName": "check-port-of-security-group",
+      "configRuleName": "access-keys-rotated",
       "configRuleDescription": "",
-      "complianceResourceTypes": [
-        "AWS::EC2::SecurityGroup"
-      ],
-      "sourceOwner": "CUSTOM_LAMBDA",
-      "sourceIdentifier": "semper_config_evaluator_sample"
+      "sourceOwner": "AWS",
+      "sourceIdentifier": "ACCESS_KEYS_ROTATED",
+      "inputParameters": "{\"maxAccessKeyAge\":\"90\"}"
     }
   },
   "eventEnrichment": {

@@ -1,7 +1,8 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "configure_eventbridge_rule",
+    "domain": "configure",
+    "type": "eventbridge_rule",
     "title": "Custom Control: Detect OU create, update, delete",
     "description": [],
     "owner": {
