@@ -74,7 +74,9 @@ The SEMPER Policies always have the following sections:
   "metaData": {...},
   "configure" or "filtering" or "enrichment": {
     "policyScope": {...},
-    typeSpecificSection: {...},
+    ...
+    <typeSpecificSection>
+    ...
   },
   "auditing": {...}
 }
@@ -84,7 +86,7 @@ The SEMPER Policies always have the following sections:
 | metaData   | object | (optional but recommended): provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*   |
 | configure *or* <br> filtering *or* <br> enrichment | object | determines the [type](#policy_types) of the policy  |
 |.policyScope | object | (optional) as described in the following chapter [Section policyScope](#policy_scope). |
-|.typeSpecificSection | object | will be described in the chapter [SEMPER Policy-Types](#policy_types). |
+|\<typeSpecificSection\> | object | will be described in the chapter [SEMPER Policy-Types](#policy_types). |
 |auditing    | object | (optional but recommended) provide here any attributes helping you to audit and reasses your policies. <br> *e.g. lastAttestationDate, contact-details of auditor*  |
 
 ## SEMPER Policy Syntax <a id="policy_syntax"></a> [🔝](#top)
