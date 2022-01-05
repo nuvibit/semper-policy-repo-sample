@@ -1,4 +1,5 @@
 This is the documentation of the SEMPER configuration and policy language.
+
 Required Semper Module Version: >= 1.0
 
 # Content <a id="top"></a>
@@ -21,6 +22,7 @@ Required Semper Module Version: >= 1.0
 
 # Intro <a id="intro"></a> [🔝](#top)
 Everything in SEMPER is managed via the policies stored in the SEMPER policy repository in the Core Security account.
+
 The technical format of the policies is [JSON](https://en.wikipedia.org/wiki/JSON).
 
 # SEMPER Policy-Repository <a id="policy_repository"></a> [🔝](#top)
@@ -29,9 +31,11 @@ SEMPER distinguishes between different policy types that will be described in la
 - [Filter-Policies](#policy_type_filter)
 - [Enrichment-Policies](#policy_type_enrichment)
 
-The following folder-structure is required for SEMPER and may not be altered.<br>
+The following folder-structure is required for SEMPER and may not be altered.
+
 There is one JSON file per policy.
-In the folders marked with "..." you may place your own policies as JSON files in the respective folder. Please ensure to use the right policy type for the right folder.  
+
+In the folders marked with "..." you may place your own policies as JSON files in the respective folder. Please ensure to use the right policy type for the right folder.
 If you want to disable policies, just create another subfolder (e.g. /disabled) and move the (given) policies you want to disable there.
 ```
 policy_repository/
@@ -87,37 +91,37 @@ The SEMPER Policies always have the following sections:
 | :---       | :---  | :---  |
 | metaData   | object | (optional but recommended): provide here any attributes helping you to organize your policies. <br> *e.g. versioning, title, description, policy-type, ownership*   |
 | configure *or* <br> filtering *or* <br> enrichment | object | determines the [type](#policy_types) of the policy  |
-|.policyScope | object | (optional) as described in the following chapter [Section policyScope](#policy_scope). |
-|\<typeSpecificSection\> | object | will be described in the chapter [SEMPER Policy-Types](#policy_types). |
-|auditing    | object | (optional but recommended) provide here any attributes helping you to audit and reasses your policies. <br> *e.g. lastAttestationDate, contact-details of auditor*  |
+| .policyScope | object | (optional) as described in the following chapter [Section policyScope](#policy_scope). |
+| \<typeSpecificSection\> | object | will be described in the chapter [SEMPER Policy-Types](#policy_types). |
+| auditing    | object | (optional but recommended) provide here any attributes helping you to audit and reasses your policies. <br> *e.g. lastAttestationDate, contact-details of auditor*  |
 
 ## SEMPER Policy Syntax <a id="policy_syntax"></a> [🔝](#top)
-The json objects *policyScope* and *typeSpecificSection* allow a SEMPER syntax that is in alignment with: [Amazon EventBridge > Create event patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html#eb-create-pattern)
-| Comparison | Example | Rule syntax | Matching source example | 
+The JSON objects *policyScope* and *typeSpecificSection* allow a SEMPER syntax that is in alignment with: [Amazon EventBridge > Create event patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html#eb-create-pattern)
+| Comparison | Example | Rule syntax | Matching source example |
 | :---   | :---  | :---  | :---  |
-| Empty | LastName is empty | "LastName": [""] | "LastName": "" | 
-| Equals | Name is "Alice" | "Name": [ "Alice" ] | "Name": "Alice" | 
-| And | Location is "New York" and Day is "Monday" | "Location": [ "New York" ], "Day": ["Monday"] | "Location": "New York", "Day": "Monday" | 
-| Or | PaymentType is "Credit" | "Debit" | "PaymentType": [ "Credit", "Debit"] | "PaymentType": "Credit" | 
-| Not | Weather is anything but "Raining" | "Weather": [ { "anything-but": [ "Raining" ] } ] | "Weather": "Sunny" | 
-| Begins with | Region is in the US | "Region": [ {"prefix": "us-" } ] | "Region": "us-east-1" | 
+| Empty | LastName is empty | "LastName": [""] | "LastName": "" |
+| Equals | Name is "Alice" | "Name": [ "Alice" ] | "Name": "Alice" |
+| And | Location is "New York" and Day is "Monday" | "Location": [ "New York" ], "Day": ["Monday"] | "Location": "New York", "Day": "Monday" |
+| Or | PaymentType is "Credit" | "Debit" | "PaymentType": [ "Credit", "Debit"] | "PaymentType": "Credit" |
+| Not | Weather is anything but "Raining" | "Weather": [ { "anything-but": [ "Raining" ] } ] | "Weather": "Sunny" |
+| Begins with | Region is in the US | "Region": [ {"prefix": "us-" } ] | "Region": "us-east-1" |
 <br>
 
-Pending in SEMPER:
-| Comparison | Example | Rule syntax | Matching source example  | 
+*Pending* in SEMPER:
+| Comparison | Example | Rule syntax | Matching source example  |
 | :---   | :---  | :---  | :---  |
-| Null | UserID is null | "UserID": [ null ] | 
-| Numeric (equals) | Price is 100 | "Price": [ { "numeric": [ "=", 100 ] } ] | 
-| Numeric (range) | Price is more than 10, and less than or equal to 20 | "Price": [ { "numeric": [ ">", 10, "<=", 20 ] } ] | 
-| Exists | ProductName exists | "ProductName": [ { "exists": true } ] | 
-| Does not exist | ProductName does not exist | "ProductName": [ { "exists": false } ] | 
+| Null | UserID is null | "UserID": [ null ] |
+| Numeric (equals) | Price is 100 | "Price": [ { "numeric": [ "=", 100 ] } ] |
+| Numeric (range) | Price is more than 10, and less than or equal to 20 | "Price": [ { "numeric": [ ">", 10, "<=", 20 ] } ] |
+| Exists | ProductName exists | "ProductName": [ { "exists": true } ] |
+| Does not exist | ProductName does not exist | "ProductName": [ { "exists": false } ] |
 <br>
 
 In SEMPER the keys of the findingPattern are **case-insensitive** to the source JSON. Additionally SEMPER supports the following syntax:
-| Comparison | Example | Rule syntax | Matching source example | 
+| Comparison | Example | Rule syntax | Matching source example |
 | :---   | :---  | :---  |:---  |
-| Ends with | Dev-System | "serviceName": [ {"suffix": "-dev" } ] | "ServiceName": "employee-database-dev" | 
-| Contains | Resource-type database | "ServiceName": [ {"contains": "ServiceName" } ] |  "serviceName": "employee-database-dev" | 
+| Ends with | Dev-System | "serviceName": [ {"suffix": "-dev" } ] | "ServiceName": "employee-database-dev" |
+| Contains | Resource-type database | "ServiceName": [ {"contains": "ServiceName" } ] |  "serviceName": "employee-database-dev" |
 
 ## Section "policyScope" <a id="policy_scope"></a> [🔝](#top)
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied.
@@ -144,13 +148,13 @@ The *policyScope-Section* allows you to specify
     ...
 }
 ```
-| Key            | Value-Type             | Comment |
-| :---           | :---                   | :---  |
-| policyScope    | object                 | necessary for each new rule |
-| .accountScope  | object                 | (optional) see [accountScope](#account_scope) |
+| Key             | Value-Type             | Comment |
+| :---            | :---                   | :---  |
+| policyScope     | object                 | necessary for each new rule |
+| .accountScope   | object                 | (optional) see [accountScope](#account_scope) |
 | . .exclude      | "*" or object          | (optional) |
 | . .forceInclude | object                 | (optional) |
-| .regionScope   | object                 | (optional) see [regionScope](#region_scope) |
+| .regionScope    | object                 | (optional) see [regionScope](#region_scope) |
 | . .exclude      | "*" or array of string | (optional) |
 | . .forceInclude | array of string        | (optional) |
 
@@ -187,19 +191,19 @@ The section *accountScope* allows you to **exclude** accounts and in a second st
       ...
 }
 ```
-| Key            | Value-Type | Comment |
-| :---           | :---   | :---  |
-| .accountScope  | object | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
-| . .exclude      | "*" or object | (optional) the elements in this section are evaluated using a *logical AND*. |
-| . . .accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| . . .ouId        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| . . .accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| Key               | Value-Type      | Comment |
+| :---              | :---            | :---  |
+| .accountScope     | object          | (optional) first the optional **exclude**-section is evaluated, then the optional **forceInclude** section. |
+| . .exclude        | "*" or object   | (optional) the elements in this section are evaluated using a *logical AND*. |
+| . . .accountId    | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| . . .ouId         | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| . . .accountTags  | dict            | (optional) the elements in this section are evaluated using a *logical AND*. |
 | . . . .tag-key-1  | array of string | Value of account-tag 1. The elements in this array are evaluated using a *logical OR*. |
 | . . . .tag-key-2  | array of string | Value of account-tag 2. The elements in this array are evaluated using a *logical OR*. |
-| . .forceInclude | object | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
-| . . .accountId   | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
-| . . .ouId        | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
-| . . .accountTags | dict | (optional) the elements in this section are evaluated using a *logical AND*. |
+| . .forceInclude   | object          | (optional) here you can specify account-context information used to include accounts to the scope. <br> Already excluded accounts can be re-added again with this section. <br> The elements in this section are evaluated using a *logical AND*. |
+| . . .accountId    | array of string | (optional) 12-digit AWS account ID. The elements in this array are evaluated using a *logical OR*. |
+| . . .ouId         | array of string | (optional) the elements in this array are evaluated using a *logical OR*. |
+| . . .accountTags  | dict            | (optional) the elements in this section are evaluated using a *logical AND*. |
 | . . . .tag-key-3  | array of string | Value of account-tag 3. The elements in this array are evaluated using a *logical OR*. |
 | . . . .tag-key-4  | array of string | Value of account-tag 4. The elements in this array are evaluated using a *logical OR*. |
 
@@ -225,7 +229,7 @@ The section **regionScope** allows you per policy to override this settings usin
 
 ### Samples for "policyScope" <a id="policy_scope_samples"></a> [🠕](#top)
 
-Sample 1: Exclude all regions and include "us-east-1" only.  
+Sample 1: Exclude all regions and include "us-east-1" only.
 Via **exclude** all regions will be ignored and via **forceInclude** one specific region will be put into scope again (take care that [SCPs](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) might prevent resources in regions):
 ```json {linenos=table,hl_lines=[],linenostart=50}
 Sample:
@@ -266,7 +270,7 @@ With th **exclude** section we ignore all possible account-contexts and with the
 }
 ```
 
-Sample 3: Include all accounts that have account-tag "Environment" != "Production" 
+Sample 3: Include all accounts that have account-tag "Environment" != "Production"
 ```json {linenos=table,hl_lines=[],linenostart=50}
 This
 {
@@ -345,16 +349,16 @@ SEMPER uses boto3 [ConfigService.Client.put_config_rule](https://boto3.amazonaws
   ...
 }
 ```
-| Key                 | Value-Type | Comment |
-| :---                | :---  | :---  |
-| .policyScope        | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
-| .configRuleSettings | object | specifying the attributes used for the boto3 call. |
-| . .configRuleName    | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with ***semper-***.|
-| . .configRuleDescription | string | (optional) according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification. |
+| Key                      | Value-Type | Comment |
+| :---                     | :---  | :---  |
+| .policyScope             | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
+| .configRuleSettings      | object | specifying the attributes used for the boto3 call. |
+| . .configRuleName        | string | according to boto3 [ConfigRuleName](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification - will be prefixed with ***semper-***.|
+| . .configRuleDescription | string | (optional) according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification.      |
 | . .complianceResourceTypes | array of string |  (optional) according to boto3 [Scope.ComplianceResourceTypes](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.put_config_rule)-specification |
-| . .sourceOwner | string | Either "CUSTOM_LAMBDA" for a custom Lambda function in the Core Security account or "AWS" for AWS managed Config rules. |
-| . .sourceIdentifier | string | If "sourceOwner" is "CUSTOM_LAMBDA", name of the custom evaluation Lambda hosted in the Core Security that is valid for this Config Rule. <br> If "sourceOwner" is "AWS", identifier of the AWS managed rule. List of [AWS Config Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html). E.g. *IAM_PASSWORD_POLICY* |
-| . .inputParameters  | string | (optional) A string, in JSON format, that is passed to the Config rule Lambda function. |
+| . .sourceOwner           | string | Either "CUSTOM_LAMBDA" for a custom Lambda function in the Core Security account or "AWS" for AWS managed Config rules. |
+| . .sourceIdentifier      | string | If "sourceOwner" is "CUSTOM_LAMBDA", name of the custom evaluation Lambda hosted in the Core Security that is valid for this Config Rule. <br> If "sourceOwner" is "AWS", identifier of the AWS managed rule. List of [AWS Config Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html). E.g. *IAM_PASSWORD_POLICY* |
+| . .inputParameters       | string | (optional) A string, in JSON format, that is passed to the Config rule Lambda function. |
 
 ### AWS EventBridge Rule Policies <a id="policy_type_configure_eventbridge"></a> [🔝](#top)
 > Folder: /10_configure/event_rules
@@ -376,10 +380,10 @@ SEMPER uses boto3 [Events.Client.put_rule](https://boto3.amazonaws.com/v1/docume
   ...
 }
 ```
-| Key                | Value-Type | Comment |
-| :---               | :---  | :---  |
-| .policyScope       | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
-| .eventSettings     | object | specifying the attributes used for the boto3 call. |
+| Key                 | Value-Type | Comment |
+| :---                | :---  | :---  |
+| .policyScope        | object | (optional) as described in this chapter [Section policyScope](#policy_scope). |
+| .eventSettings      | object | specifying the attributes used for the boto3 call. |
 | . .eventName        | string | according to boto3 [Name](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule)-specification - will be prefixed with "semper-".|
 | . .eventDescription | string | according to boto3 [Description](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#EventBridge.Client.put_rule)-specification. |
 | . .eventPattern     | array of string | The eventPattern has to follow this AWS specification: [Amazon EventBridge event patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) |
@@ -388,7 +392,7 @@ SEMPER uses boto3 [Events.Client.put_rule](https://boto3.amazonaws.com/v1/docume
 will follow
 
 
-## Filter-Policies  <a id="policy_type_filter"></a> [🔝](#top)
+## Filter-Policies <a id="policy_type_filter"></a> [🔝](#top)
 SEMPER will aggregate all the security events from the provisioned SEMPER AWS Config Rules, the AWS EventBridge Rules (API calls via CloudTrail) and also the AWS Security Hub- and Amazon GuardDuty findings. SEMPER forwards all those security findings to a SEMPER Processing Lambda in your Core Security account.
 
 This SEMPER Processing Lambda will determine the account-context (OU-ID, AWS account tags) of the originating account based on the account ID.
@@ -411,8 +415,8 @@ The generic structure of a SEMPER Filter-Policy looks like this:
   ...
 }
 ```
-| Key             | Value-Type | Comment | 
-| :---            | :---  | :---  | 
+| Key             | Value-Type | Comment |
+| :---            | :---  | :---  |
 | filtering       | object | |
 | .policyScope    | object | (optional) Each Security Finding has an originating account and an AWS region of the emitting resource. <br>As described in this chapter [Section policyScope](#policy_scope) you can limit the application of a SEMPER policy to a specific account- and region-context. |
 | .findingPattern | object | According to the [SEMPER Policy Syntax](#policy_syntax). |
@@ -451,7 +455,7 @@ The generic structure of a SEMPER Filter-Policy looks like this:
           "DisableKey",
           "ScheduleKeyDeletion"
         ]
-      }      
+      }
     }
   },
   ...
