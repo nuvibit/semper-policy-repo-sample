@@ -1,7 +1,8 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "configure_eventbridge_rule",
+    "domain": "configure",
+    "type": "eventbridge_rule",
     "title": "Custom Control: SCP attached or detached",
     "description": [],
     "owner": {
@@ -12,25 +13,17 @@
   "configure": {
     "policyScope": {
       "accountScope": {
-        "exclude": {
-          "accountId": [
-            "*"
-          ],
-          "ouId": [],
-          "accountTags": {}
-        },
+        "exclude": "*",
         "forceInclude": {
-          "accountId": [
-            "486183375590"
-          ],
-          "ouId": [],
-          "accountTags": {}
+          "accountTags": {
+            "AccountName": [
+              "Core Org Management"
+            ]
+          }
         }
       },
       "regionScope": {
-        "exclude": [
-          "*"
-        ],
+        "exclude": "*",
         "forceInclude": [
           "us-east-1"
         ]

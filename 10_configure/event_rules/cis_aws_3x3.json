@@ -1,7 +1,8 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "configure_eventbridge_rule",
+    "domain": "configure",
+    "type": "eventbridge_rule",
     "title": "CIS AWS 3.3: Usage of 'root' account",
     "description": [],
     "owner": {
@@ -12,15 +13,11 @@
   "configure": {
     "policyScope": {
       "accountScope": {
-        "exclude": "*",
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
+        "exclude": {
+          "accountId": ["*"]
         }
       },
       "regionScope": {
-        "exclude": [],
         "forceInclude": [
           "us-east-1"
         ]

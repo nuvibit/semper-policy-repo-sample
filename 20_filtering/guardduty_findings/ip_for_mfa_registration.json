@@ -1,0 +1,39 @@
+{
+  "metaData": {
+    "version": "1.0.0",
+    "domain": "filter",
+    "type": "guardduty_finding",
+    "title": "Root-User actions from a specific ip-address will not be alarmed",
+    "description": [],
+    "owner": {
+      "name": "Minnie Mouse",
+      "email": "minnie.mouse@nuvibit.com"
+    }
+  },
+  "filtering": {
+    "findingPattern": {
+      "Type": [
+        "Policy:IAMUser/RootCredentialUsage",
+        "Recon:IAMUser/UserPermissions"
+      ],
+      "Service": {
+        "Action": {
+          "AwsApiCallAction": {
+            "RemoteIpDetails": {
+              "IpAddressV4": [
+                "185.199.111.153"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "auditing": {
+    "lastAttestationDate": "20210808",
+    "auditor": {
+      "name": "Donald Duck",
+      "email": "donald.duck@nuvibit.com"
+    }
+  }
+}

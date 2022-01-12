@@ -1,8 +1,9 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "filter_cloudwatch_event_rule",
-    "title": "CIS AWS 3.10: Security group changes for Organization Management will be dropped",
+    "domain": "filter",
+    "type": "eventbridge_rule",
+    "title": "CIS AWS 3.10: Security group changes will be dropped for accounts of type NonProd or Sandbox.",
     "description": [],
     "owner": {
       "name": "Minnie Mouse",
@@ -12,19 +13,24 @@
   "filtering": {
     "policyScope": {
       "accountScope": {
-        "exclude": ["*"],
+        "exclude": "*",
         "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
+          "accountTags": {
+            "AccountType": [
+              "NonProd",
+              "Sandbox"
+            ]
+          }
         }
       },
       "regionScope": {
-        "exclude": [],
-        "forceInclude": []
+        "exclude": "*",
+        "forceInclude": [
+          "us-east-1"
+        ]
       }
     },
-    "eventPattern": {
+    "findingPattern": {
       "detail-type": [
         "AWS API Call via CloudTrail"
       ],
