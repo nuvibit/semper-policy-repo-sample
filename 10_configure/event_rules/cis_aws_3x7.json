@@ -1,7 +1,8 @@
 {
   "metaData": {
     "version": "1.0.0",
-    "type": "configure_eventbridge_rule",
+    "domain": "configure",
+    "type": "eventbridge_rule",
     "title": "CIS AWS 3.7: Disabling or scheduled deletion of customer created CMKs",
     "description": [],
     "owner": {
@@ -10,24 +11,6 @@
     }
   },
   "configure": {
-    "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
-      "regionScope": {
-        "exclude": [],
-        "forceInclude": []
-      }
-    },
     "eventSettings": {
       "eventName": "cis.aws.3.7-kms-key-disabled",
       "eventDescription": "CIS AWS 3.7 - Detect KMS key disabling or scheduled deletion events",

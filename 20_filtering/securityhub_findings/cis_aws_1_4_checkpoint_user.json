@@ -1,0 +1,45 @@
+{
+    "metaData": {
+        "version": "1.0.0",
+        "domain": "filter",
+        "type": "securityhub_finding",
+        "title": "Drop CIS_AWS_1.4 findings for IAM User foundation_checkpoint_reader.",
+        "description": [
+            "CIS AWS 1.4 – Ensure access keys are rotated every 90 days or less",
+            "The IAM User foundation_checkpoint_reader has currently no key rotation enabled.",
+            "Can be accepted due to the limited permissions of this user."
+        ],
+        "owner": {
+            "name": "Minnie Mouse",
+            "email": "minnie.mouse@nuvibit.com"
+        }
+    },
+    "filtering": {
+        "findingPattern": {
+            "ProductFields": {
+                "StandardsGuideArn": [
+                    {
+                        "prefix": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark"
+                    }
+                ],
+                "RuleId": [
+                    "1.4"
+                ]
+            },
+            "Resources": {
+                "Id": [
+                    {
+                        "suffix": ":user/checkpoint_api"
+                    }
+                ]
+            }
+        }
+    },
+    "auditing": {
+        "lastAttestationDate": "20210808",
+        "auditor": {
+            "name": "Donald Duck",
+            "email": "donald.duck@nuvibit.com"
+        }
+    }
+}
