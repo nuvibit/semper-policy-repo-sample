@@ -3,7 +3,7 @@
         "version": "1.0.0",
         "domain": "filter",
         "type": "securityhub_finding",
-        "title": "Drop FSBP_SSM_1 findings for EKS accounts.",
+        "title": "Drop FSBP_SSM_1 findings for EKS accounts",
         "description": [
             "FSBP SSM.1 EC2 instances should be managed by AWS Systems Manager",
             "For EKS EC2 instances a SSM agent will not be installed."

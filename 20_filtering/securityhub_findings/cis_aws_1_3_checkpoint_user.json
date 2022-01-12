@@ -3,7 +3,7 @@
         "version": "1.0.0",
         "domain": "filter",
         "type": "securityhub_finding",
-        "title": "Drop CIS_AWS_1.3 findings for IAM User foundation_checkpoint_reader.",
+        "title": "Drop CIS_AWS_1.3 findings for IAM User foundation_checkpoint_reader",
         "description": [
             "CIS AWS 1.3 – Ensure credentials unused for 90 days or greater are disabled",
             "The IAM User foundation_checkpoint_reader has currently no key rotation enabled.",

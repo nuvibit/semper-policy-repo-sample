@@ -103,7 +103,8 @@ The JSON objects *policyScope* and *typeSpecificSection* allow a SEMPER syntax t
 | Equals | Name is "Alice" | "Name": [ "Alice" ] | "Name": "Alice" |
 | And | Location is "New York" and Day is "Monday" | "Location": [ "New York" ], "Day": ["Monday"] | "Location": "New York", "Day": "Monday" |
 | Or | PaymentType is "Credit" | "Debit" | "PaymentType": [ "Credit", "Debit"] | "PaymentType": "Credit" |
-| Not | Weather is anything but "Raining" | "Weather": [ { "anything-but": [ "Raining" ] } ] | "Weather": "Sunny" |
+| Not (1) | Weather is anything but "Raining" or "Cloudy"| "Weather": [ { "anything-but": [ "Raining", "Cloudy" ] } ] | "Weather": "Sunny" |
+| Not (2) | Weather is anything but "Raining" | "Weather": [ { "anything-but": "Raining" } ] | "Weather": "Sunny" or "Cloudy" |
 | Begins with | Region is in the US | "Region": [ {"prefix": "us-" } ] | "Region": "us-east-1" |
 <br>
 
@@ -429,7 +430,7 @@ The generic structure of a SEMPER Filter-Policy looks like this:
     "domain": "filter",
     "type": "eventbridge_rule",
     "title": "Ignore KMS events for all environments except 'Production'",
-  ...
+    ...
   },
   "filtering": {
     "policyScope": {
@@ -462,6 +463,38 @@ The generic structure of a SEMPER Filter-Policy looks like this:
 }
 ```
 
+```json {linenos=table,hl_lines=[],linenostart=50}
+{
+  "metaData": {
+    "domain": "filter",
+    "type": "eventbridge_rule",
+    "title": "Drop CIS_AWS_1.4 findings for IAM User foundation_checkpoint_reader",
+    ...
+  },
+  "filtering": {
+    "findingPattern": {
+      "ProductFields": {
+        "StandardsGuideArn": [
+          {
+            "prefix": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark"
+          }
+        ],
+        "RuleId": [
+          "1.4"
+        ]
+      },
+      "Resources": {
+        "Id": [
+          {
+            "suffix": ":user/checkpoint_api"
+          }
+        ]
+      }
+    }
+  },
+  ...
+}
+```
 
 ## Enrichment-Policies <a id="policy_type_enrichment"></a> [🔝](#top)
 will follow
