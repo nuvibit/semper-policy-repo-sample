@@ -13,21 +13,17 @@
   "configure": {
     "policyScope": {
       "accountScope": {
-        "exclude": {
-          "accountId": [
-            "*"
-          ]
-        },
+        "exclude": "*",
         "forceInclude": {
-          "accountId": [
-            "486183375590"
-          ]
+          "accountTags": {
+            "AccountName": [
+              "Core Org Management"
+            ]
+          }
         }
       },
       "regionScope": {
-        "exclude": [
-          "*"
-        ],
+        "exclude": "*",
         "forceInclude": [
           "us-east-1"
         ]

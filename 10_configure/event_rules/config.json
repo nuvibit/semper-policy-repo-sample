@@ -21,7 +21,7 @@
           "complianceTypes": [
             "NON_COMPLIANT"
           ],
-          "configRuleName": [                
+          "configRuleName": [
             {
               "prefix": "semper-"
             }

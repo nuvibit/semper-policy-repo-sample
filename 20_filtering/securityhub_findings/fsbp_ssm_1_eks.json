@@ -1,0 +1,49 @@
+{
+    "metaData": {
+        "version": "1.0.0",
+        "domain": "filter",
+        "type": "securityhub_finding",
+        "title": "Drop FSBP_SSM_1 findings for EKS accounts.",
+        "description": [
+            "FSBP SSM.1 EC2 instances should be managed by AWS Systems Manager",
+            "For EKS EC2 instances a SSM agent will not be installed."
+        ],
+        "owner": {
+            "name": "Minnie Mouse",
+            "email": "minnie.mouse@nuvibit.com"
+        }
+    },
+    "filtering": {
+        "policyScope": {
+            "accountScope": {
+                "exclude": "*",
+                "forceInclude": {
+                    "accountTags": {
+                        "AccountType": [
+                            "Shared Service EKS"
+                        ]
+                    }
+                }
+            }
+        },
+        "findingPattern": {
+            "ProductFields": {
+                "StandardsArn": [
+                    {
+                        "prefix": "arn:aws:securityhub:::standards/aws-foundational-security-best-practices"
+                    }
+                ],
+                "ControlId": [
+                    "SSM.1"
+                ]
+            }
+        }
+    },
+    "auditing": {
+        "lastAttestationDate": "20210808",
+        "auditor": {
+            "name": "Donald Duck",
+            "email": "donald.duck@nuvibit.com"
+        }
+    }
+}
