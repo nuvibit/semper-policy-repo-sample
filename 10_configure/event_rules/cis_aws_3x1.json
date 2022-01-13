@@ -12,20 +12,7 @@
   },
   "configure": {
     "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        },
-        "forceInclude": {
-          "accountId": [],
-          "ouId": [],
-          "accountTags": {}
-        }
-      },
       "regionScope": {
-        "exclude": [],
         "forceInclude": [
           "us-east-1"
         ]

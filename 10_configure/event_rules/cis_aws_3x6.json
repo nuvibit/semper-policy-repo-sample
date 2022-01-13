@@ -13,9 +13,7 @@
   "configure": {
     "policyScope": {
       "regionScope": {
-        "exclude": [
-          "*"
-        ],
+        "exclude": "*",
         "forceInclude": [
           "us-east-1"
         ]

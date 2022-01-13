@@ -22,12 +22,6 @@
             ]
           }
         }
-      },
-      "regionScope": {
-        "exclude": "*",
-        "forceInclude": [
-          "us-east-1"
-        ]
       }
     },
     "findingPattern": {

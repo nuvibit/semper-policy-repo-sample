@@ -1,0 +1,48 @@
+{
+    "policyScope": {
+        "accountScope": {
+            "exclude": {
+                "accountId": [
+                    "id1"
+                ],
+                "ouId": [
+                    "ouId1"
+                ],
+                "accountTags": {
+                    "key1": [
+                        "value1_1",
+                        "value1_2"
+                    ],
+                    "key2": [
+                        "value2_1"
+                    ]
+                }
+            },
+            "forceInclude": {
+                "accountId": [
+                    "id2"
+                ],
+                "ouId": [
+                    "ouId2"
+                ],
+                "accountTags": {
+                    "key1": [
+                        "value1_1",
+                        "value1_2"
+                    ],
+                    "key2": [
+                        "value2_1"
+                    ]
+                }
+            }
+        },
+        "regionScope": {
+            "exclude": [
+                "eu-central-1"
+            ],
+            "forceInclude": [
+                "us-east-1"
+            ]
+        }
+    }
+}

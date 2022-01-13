@@ -12,17 +12,8 @@
   },
   "configure": {
     "policyScope": {
-      "accountScope": {
-        "exclude": {
-          "accountId": [
-            "678856817733"
-          ]
-        }
-      },
       "regionScope": {
-        "exclude": [
-          "*"
-        ],
+        "exclude": "*",
         "forceInclude": [
           "us-east-1"
         ]

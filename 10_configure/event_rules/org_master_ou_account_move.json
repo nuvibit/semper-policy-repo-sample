@@ -16,7 +16,7 @@
         "exclude": "*",
         "forceInclude": {
           "accountTags": {
-            "AccountName" : [
+            "AccountName": [
               "Core Org Management"
             ]
           }

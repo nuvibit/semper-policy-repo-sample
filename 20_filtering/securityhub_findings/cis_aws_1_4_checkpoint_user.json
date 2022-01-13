@@ -29,7 +29,7 @@
             "Resources": {
                 "Id": [
                     {
-                        "suffix": ":user/checkpoint_api"
+                        "suffix": ":user/foundation_checkpoint_reader"
                     }
                 ]
             }
