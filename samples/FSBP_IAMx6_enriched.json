@@ -1,0 +1,104 @@
+{
+  "finding": {
+      "sourceService": "AwsSecurityHub",
+      "time": "2022-01-19T09:20:46Z",
+      "raw": {
+          "version": "0",
+          "id": "3af15e19-19c3-3a4c-5e77-c64e4ba49d42",
+          "detail-type": "Security Hub Findings - Imported",
+          "source": "aws.securityhub",
+          "account": "626708301729",
+          "time": "2022-01-19T09:20:46Z",
+          "region": "eu-central-1",
+          "resources": [
+              "arn:aws:securityhub:eu-central-1::product/aws/securityhub/arn:aws:securityhub:eu-central-1:626708301729:subscription/aws-foundational-security-best-practices/v/1.0.0/IAM.6/finding/359a520c-4d34-4c83-be00-68bd0105702c"
+          ],
+          "detail": {
+              "ProductArn": "arn:aws:securityhub:eu-central-1::product/aws/securityhub",
+              "Types": [
+                  "Software and Configuration Checks/Industry and Regulatory Standards/AWS-Foundational-Security-Best-Practices"
+              ],
+              "Description": "This AWS control checks whether your AWS account is enabled to use hardware multi-factor authentication (MFA) device to sign in with root credentials.",
+              "Compliance": {
+                  "Status": "FAILED"
+              },
+              "ProductName": "Security Hub",
+              "FirstObservedAt": "2022-01-14T21:20:14.018Z",
+              "CreatedAt": "2022-01-14T21:20:14.018Z",
+              "LastObservedAt": "2022-01-19T09:20:42.632Z",
+              "CompanyName": "AWS",
+              "FindingProviderFields": {
+                  "Types": [
+                      "Software and Configuration Checks/Industry and Regulatory Standards/AWS-Foundational-Security-Best-Practices"
+                  ],
+                  "Severity": {
+                      "Normalized": 90,
+                      "Label": "CRITICAL",
+                      "Product": 90,
+                      "Original": "CRITICAL"
+                  }
+              },
+              "ProductFields": {
+                  "StandardsArn": "arn:aws:securityhub:::standards/aws-foundational-security-best-practices/v/1.0.0",
+                  "StandardsSubscriptionArn": "arn:aws:securityhub:eu-central-1:626708301729:subscription/aws-foundational-security-best-practices/v/1.0.0",
+                  "ControlId": "IAM.6",
+                  "RecommendationUrl": "https://docs.aws.amazon.com/console/securityhub/IAM.6/remediation",
+                  "RelatedAWSResources:0/name": "securityhub-root-account-hardware-mfa-enabled-a8ad20fb",
+                  "RelatedAWSResources:0/type": "AWS::Config::ConfigRule",
+                  "StandardsControlArn": "arn:aws:securityhub:eu-central-1:626708301729:control/aws-foundational-security-best-practices/v/1.0.0/IAM.6",
+                  "aws/securityhub/ProductName": "Security Hub",
+                  "aws/securityhub/CompanyName": "AWS",
+                  "Resources:0/Id": "arn:aws:iam::626708301729:root",
+                  "aws/securityhub/FindingId": "arn:aws:securityhub:eu-central-1::product/aws/securityhub/arn:aws:securityhub:eu-central-1:626708301729:subscription/aws-foundational-security-best-practices/v/1.0.0/IAM.6/finding/359a520c-4d34-4c83-be00-68bd0105702c"
+              },
+              "Remediation": {
+                  "Recommendation": {
+                      "Text": "For directions on how to fix this issue, consult the AWS Security Hub Foundational Security Best Practices documentation.",
+                      "Url": "https://docs.aws.amazon.com/console/securityhub/IAM.6/remediation"
+                  }
+              },
+              "SchemaVersion": "2018-10-08",
+              "GeneratorId": "aws-foundational-security-best-practices/v/1.0.0/IAM.6",
+              "RecordState": "ACTIVE",
+              "Title": "IAM.6 Hardware MFA should be enabled for the root user",
+              "Workflow": {
+                  "Status": "NEW"
+              },
+              "Severity": {
+                  "Normalized": 90,
+                  "Label": "CRITICAL",
+                  "Product": 90,
+                  "Original": "CRITICAL"
+              },
+              "UpdatedAt": "2022-01-19T09:20:38.543Z",
+              "WorkflowState": "NEW",
+              "AwsAccountId": "626708301729",
+              "Region": "eu-central-1",
+              "Id": "arn:aws:securityhub:eu-central-1:626708301729:subscription/aws-foundational-security-best-practices/v/1.0.0/IAM.6/finding/359a520c-4d34-4c83-be00-68bd0105702c",
+              "Resources": [
+                  {
+                      "Partition": "aws",
+                      "Type": "AwsAccount",
+                      "Region": "eu-central-1",
+                      "Id": "AWS::::Account:626708301729"
+                  }
+              ]
+          }
+      }
+  },
+  "accountContext": {
+      "accountId": "626708301729",
+      "ouId": "ou-srnr-lwyhsa9c",
+      "accountTags": {
+          "account_email": "accounts+aws-c1-security@nuvibit.com",
+          "environment": "nonprod",
+          "recycled": "false",
+          "account_name": "aws-c1-security",
+          "share_remote_state": "false",
+          "title": "security account - customer1 stage",
+          "account_owner": "semper@nuvibit.com",
+          "tenant": "customer1",
+          "tfc_execution_mode": "remote"
+      }
+  }
+}

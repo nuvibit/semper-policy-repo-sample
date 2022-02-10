@@ -1,0 +1,67 @@
+{
+    "version": "0",
+    "id": "e67b423d-11fe-3cdd-5f3e-996100e39e36",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.kms",
+    "account": "626708301729",
+    "time": "2022-01-20T20:46:26Z",
+    "region": "eu-central-1",
+    "resources": [],
+    "detail": {
+        "eventVersion": "1.08",
+        "userIdentity": {
+            "type": "AssumedRole",
+            "principalId": "AROAZD2VZY6QQWB4D7CX6:semper@nuvibit.com",
+            "arn": "arn:aws:sts::626708301729:assumed-role/AWSReservedSSO_AdministratorAccess_1f51a532758ff888/semper@nuvibit.com",
+            "accountId": "626708301729",
+            "accessKeyId": "ASIAZD2VZY6QSRIMENEC",
+            "sessionContext": {
+                "sessionIssuer": {
+                    "type": "Role",
+                    "principalId": "AROAZD2VZY6QQWB4D7CX6",
+                    "arn": "arn:aws:iam::626708301729:role/aws-reserved/sso.amazonaws.com/eu-central-1/AWSReservedSSO_AdministratorAccess_1f51a532758ff888",
+                    "accountId": "626708301729",
+                    "userName": "AWSReservedSSO_AdministratorAccess_1f51a532758ff888"
+                },
+                "webIdFederationData": {},
+                "attributes": {
+                    "creationDate": "2022-01-20T20:13:01Z",
+                    "mfaAuthenticated": "false"
+                }
+            }
+        },
+        "eventTime": "2022-01-20T20:46:26Z",
+        "eventSource": "kms.amazonaws.com",
+        "eventName": "DisableKey",
+        "awsRegion": "eu-central-1",
+        "sourceIPAddress": "1.2.3.4",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
+        "errorCode": "KMSInvalidStateException",
+        "errorMessage": "arn:aws:kms:eu-central-1:626708301729:key/ab9508d2-1f91-4090-945a-5894b1a082eb is pending import.",
+        "requestParameters": {
+            "keyId": "ab9508d2-1f91-4090-945a-5894b1a082eb"
+        },
+        "responseElements": null,
+        "requestID": "a19215dc-e53d-49d2-a359-2f9a7962a22d",
+        "eventID": "c228fa45-174c-4624-ac73-363530327457",
+        "readOnly": false,
+        "resources": [
+            {
+                "accountId": "626708301729",
+                "type": "AWS::KMS::Key",
+                "ARN": "arn:aws:kms:eu-central-1:626708301729:key/ab9508d2-1f91-4090-945a-5894b1a082eb"
+            }
+        ],
+        "eventType": "AwsApiCall",
+        "managementEvent": true,
+        "recipientAccountId": "626708301729",
+        "eventCategory": "Management",
+        "tlsDetails": {
+            "tlsVersion": "TLSv1.2",
+            "cipherSuite": "ECDHE-RSA-AES256-GCM-SHA384",
+            "clientProvidedHostHeader": "kms.eu-central-1.amazonaws.com"
+        },
+        "sessionCredentialFromConsole": "true"
+    }
+}
+}

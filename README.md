@@ -114,15 +114,17 @@ The JSON objects *policyScope* and *typeSpecificSection* allow a SEMPER syntax t
 | Null | UserID is null | "UserID": [ null ] |
 | Numeric (equals) | Price is 100 | "Price": [ { "numeric": [ "=", 100 ] } ] |
 | Numeric (range) | Price is more than 10, and less than or equal to 20 | "Price": [ { "numeric": [ ">", 10, "<=", 20 ] } ] |
-| Exists | ProductName exists | "ProductName": [ { "exists": true } ] |
-| Does not exist | ProductName does not exist | "ProductName": [ { "exists": false } ] |
 <br>
 
 In SEMPER the keys of the findingPattern are **case-insensitive** to the source JSON. Additionally SEMPER supports the following syntax:
 | Comparison | Example | Rule syntax | Matching source example |
 | :---   | :---  | :---  |:---  |
 | Ends with | Dev-System | "serviceName": [ {"suffix": "-dev" } ] | "ServiceName": "employee-database-dev" |
-| Contains | Resource-type database | "ServiceName": [ {"contains": "ServiceName" } ] |  "serviceName": "employee-database-dev" |
+| Contains | ServiceName contains 'database' | "ServiceName": [ {"contains": "database" } ] |  "serviceName": "employee-database-dev" |
+| Does not contain | ServiceName does not contain 'database' | "ServiceName": [ {"contains-not": "database" } ] |  "serviceName": "employee-microservice-dev" |
+| Exists | ProductName exists | "ProductName": [ { "exists": true } ] | "ProductName": "SEMPER" |
+| Does not exist | ProductName does not exist | "ProductName": [ { "exists": false } ] | n/a |
+
 
 ## Section "policyScope" <a id="policy_scope"></a> [🔝](#top)
 You can specify on a finegrained level in which member account and in which AWS region a SEMPER policy should be applied.
