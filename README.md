@@ -18,7 +18,8 @@ Required Semper Module Version: >= 1.0
     - [AWS Security Hub Policies](#policy_type_configure_securityhub)
   - [Filter-Policies](#policy_type_filter)
     - [Samples of Filter-Policies](#policy_filter_samples)
-  - [Enrichment-Policies](#policy_type_enrichment)
+  - [Instruction-Policies](#policy_type_instructions)
+- [SEMPER Use-Cases](#policy_types)
 
 # Intro <a id="intro"></a> [🔝](#top)
 Everything in SEMPER is managed via the policies stored in the SEMPER policy repository in the Core Security account.
@@ -106,6 +107,8 @@ The JSON objects *policyScope* and *typeSpecificSection* allow a SEMPER syntax t
 | Not (1) | Weather is anything but "Raining" or "Cloudy"| "Weather": [ { "anything-but": [ "Raining", "Cloudy" ] } ] | "Weather": "Sunny" |
 | Not (2) | Weather is anything but "Raining" | "Weather": [ { "anything-but": "Raining" } ] | "Weather": "Sunny" or "Cloudy" |
 | Begins with | Region is in the US | "Region": [ {"prefix": "us-" } ] | "Region": "us-east-1" |
+| Exists | ProductName exists | "ProductName": [ { "exists": true } ] | "ProductName": "SEMPER" |
+| Does not exist | ProductName does not exist | "ProductName": [ { "exists": false } ] | n/a |
 <br>
 
 *Pending* in SEMPER:
@@ -122,8 +125,7 @@ In SEMPER the keys of the findingPattern are **case-insensitive** to the source 
 | Ends with | Dev-System | "serviceName": [ {"suffix": "-dev" } ] | "ServiceName": "employee-database-dev" |
 | Contains | ServiceName contains 'database' | "ServiceName": [ {"contains": "database" } ] |  "serviceName": "employee-database-dev" |
 | Does not contain | ServiceName does not contain 'database' | "ServiceName": [ {"contains-not": "database" } ] |  "serviceName": "employee-microservice-dev" |
-| Exists | ProductName exists | "ProductName": [ { "exists": true } ] | "ProductName": "SEMPER" |
-| Does not exist | ProductName does not exist | "ProductName": [ { "exists": false } ] | n/a |
+
 
 
 ## Section "policyScope" <a id="policy_scope"></a> [🔝](#top)
@@ -498,5 +500,7 @@ The generic structure of a SEMPER Filter-Policy looks like this:
 }
 ```
 
-## Enrichment-Policies <a id="policy_type_enrichment"></a> [🔝](#top)
-will follow
+## Instruction-Policies <a id="policy_type_instructions"></a> [🔝](#top)
+Instruction policies allow you a policy based extension of the finding policy with instructions for post-processing stages.
+
+... will follow
